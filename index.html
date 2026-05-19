@@ -50,6 +50,36 @@
 
   .container { max-width: 800px; margin: 0 auto; padding: 1.5rem; }
 
+  /* Language toggle */
+  .lang-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .lang-btn {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .lang-btn.active {
+    background: rgba(255,255,255,0.25);
+    color: white;
+  }
+
+  .lang-btn:hover { color: white; }
+
   /* Navigation tabs */
   .tabs {
     display: flex;
@@ -412,164 +442,170 @@
     .card { padding: 1.2rem; }
     .flashcard-face { padding: 1.5rem; }
     .timer-display { font-size: 2.5rem; }
+    .lang-toggle { top: 0.5rem; right: 0.5rem; }
+    .lang-btn { padding: 0.3rem 0.6rem; font-size: 0.75rem; }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <p class="subtitle">Interview Preparation</p>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ro')">RO</button>
+  </div>
+  <p class="subtitle" data-i18n="header_subtitle">Interview Preparation</p>
   <h1>Schmitz Cargobull - Customer Support</h1>
-  <p>Romanian-speaking representative &bull; Remote role</p>
+  <p data-i18n="header_desc">Romanian-speaking representative &bull; Remote role</p>
 </header>
 
 <div class="container">
 
   <div class="tabs" id="tabs">
-    <button class="tab active" data-tab="strengths">Your Strengths</button>
-    <button class="tab" data-tab="company">Company Info</button>
-    <button class="tab" data-tab="flashcards">Flashcards</button>
-    <button class="tab" data-tab="mock">Mock Interview</button>
-    <button class="tab" data-tab="checklist">Checklist</button>
-    <button class="tab" data-tab="practice">Practice Timer</button>
-    <button class="tab" data-tab="notes">My Notes</button>
+    <button class="tab active" data-tab="strengths" data-i18n="tab_strengths">Your Strengths</button>
+    <button class="tab" data-tab="company" data-i18n="tab_company">Company Info</button>
+    <button class="tab" data-tab="flashcards" data-i18n="tab_flashcards">Flashcards</button>
+    <button class="tab" data-tab="mock" data-i18n="tab_mock">Mock Interview</button>
+    <button class="tab" data-tab="checklist" data-i18n="tab_checklist">Checklist</button>
+    <button class="tab" data-tab="practice" data-i18n="tab_practice">Practice Timer</button>
+    <button class="tab" data-tab="notes" data-i18n="tab_notes">My Notes</button>
   </div>
 
   <!-- STRENGTHS SECTION -->
   <div class="section active" id="strengths">
     <div class="card">
-      <h3>Why You're a Great Fit, Rafael</h3>
-      <p style="font-size:0.92rem; color:var(--text-light); margin-bottom:1rem;">Here's how your background maps to what they're looking for:</p>
+      <h3 data-i18n="str_title">Why You're a Great Fit, Rafael</h3>
+      <p style="font-size:0.92rem; color:var(--text-light); margin-bottom:1rem;" data-i18n="str_subtitle">Here's how your background maps to what they're looking for:</p>
 
       <div class="strength-item">
         <div class="strength-icon lang">R</div>
         <div class="strength-details">
-          <h4>Romanian (C1-C2) &mdash; Core Requirement Met</h4>
-          <p>They need native or near-native Romanian. You have it. This is your #1 differentiator vs other candidates.</p>
+          <h4 data-i18n="str_ro_title">Romanian (C1-C2) &mdash; Core Requirement Met</h4>
+          <p data-i18n="str_ro_desc">They need native or near-native Romanian. You have it. This is your #1 differentiator vs other candidates.</p>
         </div>
       </div>
 
       <div class="strength-item">
         <div class="strength-icon lang">E</div>
         <div class="strength-details">
-          <h4>English (C1-C2) &mdash; Strong</h4>
-          <p>Good command of spoken and written English &mdash; check. You studied in the UK, which proves real fluency.</p>
+          <h4 data-i18n="str_en_title">English (C1-C2) &mdash; Strong</h4>
+          <p data-i18n="str_en_desc">Good command of spoken and written English &mdash; check. You studied in the UK, which proves real fluency.</p>
         </div>
       </div>
 
       <div class="strength-item">
         <div class="strength-icon lang">D</div>
         <div class="strength-details">
-          <h4>German (A2-B1) &mdash; Bonus Language</h4>
-          <p>Schmitz Cargobull is a <strong>German company</strong>. Even intermediate German shows cultural alignment. Mention willingness to improve it!</p>
+          <h4 data-i18n="str_de_title">German (A2-B1) &mdash; Bonus Language</h4>
+          <p data-i18n="str_de_desc">Schmitz Cargobull is a <strong>German company</strong>. Even intermediate German shows cultural alignment. Mention willingness to improve it!</p>
         </div>
       </div>
 
       <div class="strength-item">
         <div class="strength-icon exp">Rx</div>
         <div class="strength-details">
-          <h4>Pharmacy Experience &mdash; Your Best Story</h4>
-          <p>Served customers, handled queries, processed prescriptions accurately, verified deliveries. This is the closest thing to phone support + data entry. Lead with this.</p>
+          <h4 data-i18n="str_pharm_title">Pharmacy Experience &mdash; Your Best Story</h4>
+          <p data-i18n="str_pharm_desc">Served customers, handled queries, processed prescriptions accurately, verified deliveries. This is the closest thing to phone support + data entry. Lead with this.</p>
         </div>
       </div>
 
       <div class="strength-item">
         <div class="strength-icon exp">CS</div>
         <div class="strength-details">
-          <h4>Charity Shop &mdash; Customer-Facing Retail</h4>
-          <p>Answering queries, assisting with purchases, maintaining standards. Shows friendly service orientation.</p>
+          <h4 data-i18n="str_charity_title">Charity Shop &mdash; Customer-Facing Retail</h4>
+          <p data-i18n="str_charity_desc">Answering queries, assisting with purchases, maintaining standards. Shows friendly service orientation.</p>
         </div>
       </div>
 
       <div class="strength-item">
         <div class="strength-icon soft">TA</div>
         <div class="strength-details">
-          <h4>Teaching Assistant &mdash; Communication & Patience</h4>
-          <p>One-to-one support, adapting to different learners. Perfect example for "how do you handle someone who doesn't understand?"</p>
+          <h4 data-i18n="str_ta_title">Teaching Assistant &mdash; Communication & Patience</h4>
+          <p data-i18n="str_ta_desc">One-to-one support, adapting to different learners. Perfect example for "how do you handle someone who doesn't understand?"</p>
         </div>
       </div>
 
       <div class="strength-item">
         <div class="strength-icon soft">BHF</div>
         <div class="strength-details">
-          <h4>54-Mile Charity Ride &mdash; Commitment & Drive</h4>
-          <p>Shows discipline, goal-setting, and community spirit. Aligns with their "human-centered company culture" value.</p>
+          <h4 data-i18n="str_bhf_title">54-Mile Charity Ride &mdash; Commitment & Drive</h4>
+          <p data-i18n="str_bhf_desc">Shows discipline, goal-setting, and community spirit. Aligns with their "human-centered company culture" value.</p>
         </div>
       </div>
     </div>
 
     <div class="highlight">
-      <strong>Key message to convey:</strong> "I bring the exact language skills you need, real customer-facing experience across three different settings, and I'm relocating because I'm genuinely committed to this opportunity."
+      <strong data-i18n="str_key_label">Key message to convey:</strong> <span data-i18n="str_key_msg">"I bring the exact language skills you need, real customer-facing experience across three different settings, and I'm relocating because I'm genuinely committed to this opportunity."</span>
     </div>
 
     <div class="card">
-      <h3>Address the Elephant in the Room</h3>
-      <p style="margin-bottom:0.8rem;">They will ask about uni. Be ready:</p>
+      <h3 data-i18n="str_elephant_title">Address the Elephant in the Room</h3>
+      <p style="margin-bottom:0.8rem;" data-i18n="str_elephant_intro">They will ask about uni. Be ready:</p>
       <div class="highlight">
-        "I've decided to pause my studies to fully commit to a professional opportunity. I want to build real-world experience in a company where I can grow long-term. Schmitz Cargobull's emphasis on continuous training and internal career development is exactly what I'm looking for at this stage."
+        <span data-i18n="str_elephant_answer">"I've decided to pause my studies to fully commit to a professional opportunity. I want to build real-world experience in a company where I can grow long-term. Schmitz Cargobull's emphasis on continuous training and internal career development is exactly what I'm looking for at this stage."</span>
       </div>
-      <p style="font-size:0.88rem; color:var(--text-light); margin-top:0.5rem;">Frame it as a deliberate career move, not "dropping out." You're <em>choosing</em> professional growth.</p>
+      <p style="font-size:0.88rem; color:var(--text-light); margin-top:0.5rem;" data-i18n="str_elephant_tip">Frame it as a deliberate career move, not "dropping out." You're <em>choosing</em> professional growth.</p>
     </div>
   </div>
 
   <!-- COMPANY INFO -->
   <div class="section" id="company">
     <div class="card">
-      <h3>About Schmitz Cargobull</h3>
+      <h3 data-i18n="comp_about_title">About Schmitz Cargobull</h3>
       <ul>
-        <li><strong>Founded:</strong> 1892 in Altenberge, Germany</li>
-        <li><strong>HQ:</strong> Horstmar, North Rhine-Westphalia, Germany</li>
-        <li><strong>Industry:</strong> Trailer &amp; semi-trailer manufacturing</li>
-        <li><strong>Position:</strong> Europe's leading semi-trailer manufacturer</li>
-        <li><strong>Employees:</strong> ~6,500+</li>
-        <li><strong>Production:</strong> ~60,000 vehicles/year</li>
-        <li><strong>Customers:</strong> Fleet operators, logistics companies, freight carriers, haulage firms</li>
+        <li><strong data-i18n="comp_founded_label">Founded:</strong> <span data-i18n="comp_founded_val">1892 in Altenberge, Germany</span></li>
+        <li><strong data-i18n="comp_hq_label">HQ:</strong> Horstmar, North Rhine-Westphalia, Germany</li>
+        <li><strong data-i18n="comp_industry_label">Industry:</strong> <span data-i18n="comp_industry_val">Trailer & semi-trailer manufacturing</span></li>
+        <li><strong data-i18n="comp_position_label">Position:</strong> <span data-i18n="comp_position_val">Europe's leading semi-trailer manufacturer</span></li>
+        <li><strong data-i18n="comp_employees_label">Employees:</strong> ~6,500+</li>
+        <li><strong data-i18n="comp_production_label">Production:</strong> <span data-i18n="comp_production_val">~60,000 vehicles/year</span></li>
+        <li><strong data-i18n="comp_customers_label">Customers:</strong> <span data-i18n="comp_customers_val">Fleet operators, logistics companies, freight carriers, haulage firms</span></li>
       </ul>
     </div>
 
     <div class="card">
-      <h3>Key Products &mdash; Know These!</h3>
+      <h3 data-i18n="comp_products_title">Key Products &mdash; Know These!</h3>
       <div class="product-grid">
         <div class="product-card">
-          <h4>Refrigerated Trailers (Reefers)</h4>
+          <h4 data-i18n="prod_reefer_title">Refrigerated Trailers (Reefers)</h4>
           <div class="product-german">German: K&uuml;hlauflieger</div>
-          <p>Temperature-controlled trailers for transporting perishable goods (food, pharmaceuticals). Schmitz Cargobull's FERROPLAST technology is well-known. This is their flagship product line.</p>
+          <p data-i18n="prod_reefer_desc">Temperature-controlled trailers for transporting perishable goods (food, pharmaceuticals). Schmitz Cargobull's FERROPLAST technology is well-known. This is their flagship product line.</p>
         </div>
         <div class="product-card">
-          <h4>Curtain-sided Trailers (Tautliners)</h4>
+          <h4 data-i18n="prod_curtain_title">Curtain-sided Trailers (Tautliners)</h4>
           <div class="product-german">German: Schiebeplanenauflieger</div>
-          <p>Flexible trailers with sliding curtain sides for easy side-loading. Popular for general cargo, palletised goods. Very common in European logistics.</p>
+          <p data-i18n="prod_curtain_desc">Flexible trailers with sliding curtain sides for easy side-loading. Popular for general cargo, palletised goods. Very common in European logistics.</p>
         </div>
         <div class="product-card">
-          <h4>Box Trailers (Dry Freight)</h4>
+          <h4 data-i18n="prod_box_title">Box Trailers (Dry Freight)</h4>
           <div class="product-german">German: Kofferauflieger</div>
-          <p>Enclosed rigid-sided trailers for dry goods, furniture, electronics &mdash; anything that needs protection from weather but not temperature control.</p>
+          <p data-i18n="prod_box_desc">Enclosed rigid-sided trailers for dry goods, furniture, electronics &mdash; anything that needs protection from weather but not temperature control.</p>
         </div>
         <div class="product-card">
-          <h4>Container Chassis</h4>
+          <h4 data-i18n="prod_container_title">Container Chassis</h4>
           <div class="product-german">German: Containerchassis</div>
-          <p>Frames designed to carry shipping containers. Used in intermodal transport (ship-to-rail-to-road).</p>
+          <p data-i18n="prod_container_desc">Frames designed to carry shipping containers. Used in intermodal transport (ship-to-rail-to-road).</p>
         </div>
         <div class="product-card">
-          <h4>Tipper Trailers</h4>
+          <h4 data-i18n="prod_tipper_title">Tipper Trailers</h4>
           <div class="product-german">German: Kipperauflieger</div>
-          <p>For bulk materials like grain, aggregates, and construction materials. Can tip to unload cargo.</p>
+          <p data-i18n="prod_tipper_desc">For bulk materials like grain, aggregates, and construction materials. Can tip to unload cargo.</p>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <h3>Digital &amp; Telematics</h3>
-      <p>Schmitz Cargobull also offers <strong>TrailerConnect</strong> &mdash; a telematics system that lets fleet managers track trailer location, temperature, door status, and more in real-time. Mentioning you know about this shows initiative.</p>
+      <h3 data-i18n="comp_digital_title">Digital & Telematics</h3>
+      <p data-i18n="comp_digital_desc">Schmitz Cargobull also offers <strong>TrailerConnect</strong> &mdash; a telematics system that lets fleet managers track trailer location, temperature, door status, and more in real-time. Mentioning you know about this shows initiative.</p>
     </div>
 
     <div class="card">
-      <h3>Company Values to Reference</h3>
+      <h3 data-i18n="comp_values_title">Company Values to Reference</h3>
       <ul>
-        <li><strong>Quality &amp; reliability</strong> &mdash; 130+ years of engineering excellence</li>
-        <li><strong>Innovation</strong> &mdash; telematics, lightweight construction, sustainability efforts</li>
-        <li><strong>Customer focus</strong> &mdash; strong after-sales and service network across Europe</li>
-        <li><strong>Sustainability</strong> &mdash; working on reducing transport emissions</li>
+        <li><strong data-i18n="val_quality_label">Quality & reliability</strong> &mdash; <span data-i18n="val_quality_desc">130+ years of engineering excellence</span></li>
+        <li><strong data-i18n="val_innovation_label">Innovation</strong> &mdash; <span data-i18n="val_innovation_desc">telematics, lightweight construction, sustainability efforts</span></li>
+        <li><strong data-i18n="val_customer_label">Customer focus</strong> &mdash; <span data-i18n="val_customer_desc">strong after-sales and service network across Europe</span></li>
+        <li><strong data-i18n="val_sustainability_label">Sustainability</strong> &mdash; <span data-i18n="val_sustainability_desc">working on reducing transport emissions</span></li>
       </ul>
     </div>
   </div>
@@ -577,14 +613,14 @@
   <!-- FLASHCARDS -->
   <div class="section" id="flashcards">
     <div class="card">
-      <h3>Study Flashcards</h3>
-      <p style="font-size:0.9rem; color:var(--text-light);">Click to flip. Use arrows to navigate.</p>
+      <h3 data-i18n="fc_title">Study Flashcards</h3>
+      <p style="font-size:0.9rem; color:var(--text-light);" data-i18n="fc_subtitle">Click to flip. Use arrows to navigate.</p>
 
       <div class="flashcard-container">
         <div class="flashcard" id="flashcard" onclick="flipCard()">
           <div class="flashcard-face flashcard-front">
             <h3 id="fc-question"></h3>
-            <div class="hint">Click to reveal answer</div>
+            <div class="hint" data-i18n="fc_hint">Click to reveal answer</div>
           </div>
           <div class="flashcard-face flashcard-back">
             <div id="fc-answer"></div>
@@ -593,9 +629,9 @@
       </div>
 
       <div class="flashcard-nav">
-        <button onclick="prevCard()">&larr; Prev</button>
+        <button onclick="prevCard()" data-i18n="fc_prev">&larr; Prev</button>
         <span class="flashcard-counter" id="fc-counter"></span>
-        <button onclick="nextCard()">Next &rarr;</button>
+        <button onclick="nextCard()" data-i18n="fc_next">Next &rarr;</button>
       </div>
     </div>
   </div>
@@ -603,20 +639,20 @@
   <!-- MOCK INTERVIEW -->
   <div class="section" id="mock">
     <div class="card">
-      <h3>Mock Interview Questions</h3>
-      <p style="font-size:0.9rem; color:var(--text-light); margin-bottom:1.5rem;">Practice answering out loud, then check the suggested answer. Rate your confidence.</p>
+      <h3 data-i18n="mock_title">Mock Interview Questions</h3>
+      <p style="font-size:0.9rem; color:var(--text-light); margin-bottom:1.5rem;" data-i18n="mock_subtitle">Practice answering out loud, then check the suggested answer. Rate your confidence.</p>
 
       <div id="mock-questions"></div>
     </div>
 
     <div class="card">
-      <h3>Scenario-Based Questions</h3>
+      <h3 data-i18n="scenario_title">Scenario-Based Questions</h3>
 
       <div class="question-block">
-        <h4>Scenario 1: Angry customer about delayed delivery</h4>
-        <p style="font-size:0.9rem; margin-bottom:0.5rem;">"A Romanian-speaking customer calls, very frustrated, saying their trailer was supposed to arrive last week and it hasn't. You don't have access to delivery tracking. What do you do?"</p>
-        <button class="answer-toggle" onclick="toggleAnswer('s1')">Show Suggested Approach</button>
-        <div class="sample-answer" id="s1">
+        <h4 data-i18n="s1_title">Scenario 1: Angry customer about delayed delivery</h4>
+        <p style="font-size:0.9rem; margin-bottom:0.5rem;" data-i18n="s1_desc">"A Romanian-speaking customer calls, very frustrated, saying their trailer was supposed to arrive last week and it hasn't. You don't have access to delivery tracking. What do you do?"</p>
+        <button class="answer-toggle" onclick="toggleAnswer('s1')" data-i18n="btn_show_approach">Show Suggested Approach</button>
+        <div class="sample-answer" id="s1" data-i18n="s1_answer">
           <strong>1.</strong> Stay calm, listen actively, acknowledge their frustration: "I completely understand your concern, and I'm sorry for the inconvenience."<br><br>
           <strong>2.</strong> Gather information: order number, name, delivery address, contact details.<br><br>
           <strong>3.</strong> Be honest: "I want to make sure you get accurate information, so I'm going to escalate this to our logistics team who can check the exact status."<br><br>
@@ -627,10 +663,10 @@
       </div>
 
       <div class="question-block">
-        <h4>Scenario 2: Customer asks technical questions you can't answer</h4>
-        <p style="font-size:0.9rem; margin-bottom:0.5rem;">"A customer calls asking about the specific temperature range of the S.KO COOL refrigerated trailer and whether it's compatible with their fleet's tracking system."</p>
-        <button class="answer-toggle" onclick="toggleAnswer('s2')">Show Suggested Approach</button>
-        <div class="sample-answer" id="s2">
+        <h4 data-i18n="s2_title">Scenario 2: Customer asks technical questions you can't answer</h4>
+        <p style="font-size:0.9rem; margin-bottom:0.5rem;" data-i18n="s2_desc">"A customer calls asking about the specific temperature range of the S.KO COOL refrigerated trailer and whether it's compatible with their fleet's tracking system."</p>
+        <button class="answer-toggle" onclick="toggleAnswer('s2')" data-i18n="btn_show_approach">Show Suggested Approach</button>
+        <div class="sample-answer" id="s2" data-i18n="s2_answer">
           <strong>1.</strong> Thank them for the question and show interest.<br><br>
           <strong>2.</strong> Share what you know at a basic level: "Our refrigerated trailers are designed for a wide range of temperature-controlled transport."<br><br>
           <strong>3.</strong> For specifics: "For the exact technical specifications and compatibility, I'd like to connect you with our technical sales team who can give you the most accurate information."<br><br>
@@ -644,26 +680,26 @@
   <!-- CHECKLIST -->
   <div class="section" id="checklist">
     <div class="card">
-      <h3>Interview Preparation Checklist</h3>
+      <h3 data-i18n="check_title">Interview Preparation Checklist</h3>
       <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
       <div class="progress-text" id="progress-text">0 / 15 completed</div>
 
       <div id="checklist-items">
-        <div class="checklist-item"><input type="checkbox" id="c1" onchange="updateProgress()"><label for="c1">Research Schmitz Cargobull's history and key facts</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c2" onchange="updateProgress()"><label for="c2">Learn the 5 main product types (reefer, curtain, box, container, tipper)</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c3" onchange="updateProgress()"><label for="c3">Practice "Tell me about yourself" answer out loud (2 min max)</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c4" onchange="updateProgress()"><label for="c4">Prepare your pharmacy experience story (STAR format)</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c5" onchange="updateProgress()"><label for="c5">Prepare answer for "Why leave university?"</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c6" onchange="updateProgress()"><label for="c6">Practice a self-introduction in Romanian</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c7" onchange="updateProgress()"><label for="c7">Prepare 3-5 questions to ask the interviewer</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c8" onchange="updateProgress()"><label for="c8">Review all flashcards at least twice</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c9" onchange="updateProgress()"><label for="c9">Do a full mock interview with a friend (20 min)</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c10" onchange="updateProgress()"><label for="c10">Test your microphone, webcam, and internet connection</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c11" onchange="updateProgress()"><label for="c11">Prepare a quiet, well-lit space for the interview</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c12" onchange="updateProgress()"><label for="c12">Have a copy of your CV ready to reference</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c13" onchange="updateProgress()"><label for="c13">Prepare a notepad and pen for notes during the interview</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c14" onchange="updateProgress()"><label for="c14">Pick out professional, smart-casual clothes</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c15" onchange="updateProgress()"><label for="c15">Get a good night's sleep before the interview</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c1" onchange="updateProgress()"><label for="c1" data-i18n="check_1">Research Schmitz Cargobull's history and key facts</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c2" onchange="updateProgress()"><label for="c2" data-i18n="check_2">Learn the 5 main product types (reefer, curtain, box, container, tipper)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c3" onchange="updateProgress()"><label for="c3" data-i18n="check_3">Practice "Tell me about yourself" answer out loud (2 min max)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c4" onchange="updateProgress()"><label for="c4" data-i18n="check_4">Prepare your pharmacy experience story (STAR format)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c5" onchange="updateProgress()"><label for="c5" data-i18n="check_5">Prepare answer for "Why leave university?"</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c6" onchange="updateProgress()"><label for="c6" data-i18n="check_6">Practice a self-introduction in Romanian</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c7" onchange="updateProgress()"><label for="c7" data-i18n="check_7">Prepare 3-5 questions to ask the interviewer</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c8" onchange="updateProgress()"><label for="c8" data-i18n="check_8">Review all flashcards at least twice</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c9" onchange="updateProgress()"><label for="c9" data-i18n="check_9">Do a full mock interview with a friend (20 min)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c10" onchange="updateProgress()"><label for="c10" data-i18n="check_10">Test your microphone, webcam, and internet connection</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c11" onchange="updateProgress()"><label for="c11" data-i18n="check_11">Prepare a quiet, well-lit space for the interview</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c12" onchange="updateProgress()"><label for="c12" data-i18n="check_12">Have a copy of your CV ready to reference</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c13" onchange="updateProgress()"><label for="c13" data-i18n="check_13">Prepare a notepad and pen for notes during the interview</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c14" onchange="updateProgress()"><label for="c14" data-i18n="check_14">Pick out professional, smart-casual clothes</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c15" onchange="updateProgress()"><label for="c15" data-i18n="check_15">Get a good night's sleep before the interview</label></div>
       </div>
     </div>
   </div>
@@ -671,54 +707,54 @@
   <!-- PRACTICE TIMER -->
   <div class="section" id="practice">
     <div class="card">
-      <h3>Practice Answer Timer</h3>
-      <p style="font-size:0.9rem; color:var(--text-light); margin-bottom:1rem;">Use this to time your answers. Aim for 1-2 minutes per question &mdash; concise but complete.</p>
+      <h3 data-i18n="timer_title">Practice Answer Timer</h3>
+      <p style="font-size:0.9rem; color:var(--text-light); margin-bottom:1rem;" data-i18n="timer_subtitle">Use this to time your answers. Aim for 1-2 minutes per question &mdash; concise but complete.</p>
       <div class="timer-widget">
         <div class="timer-display" id="timer-display">0:00</div>
-        <div style="font-size:0.82rem; color:var(--text-light); margin-bottom:0.5rem;" id="timer-hint">Sweet spot: 1:00 - 2:00</div>
+        <div style="font-size:0.82rem; color:var(--text-light); margin-bottom:0.5rem;" id="timer-hint" data-i18n="timer_sweet">Sweet spot: 1:00 - 2:00</div>
         <div class="timer-buttons">
-          <button class="timer-btn timer-start" id="timer-start" onclick="toggleTimer()">Start</button>
-          <button class="timer-btn timer-reset" onclick="resetTimer()">Reset</button>
+          <button class="timer-btn timer-start" id="timer-start" onclick="toggleTimer()" data-i18n="timer_start">Start</button>
+          <button class="timer-btn timer-reset" onclick="resetTimer()" data-i18n="timer_reset">Reset</button>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <h3>Quick Practice Prompts</h3>
-      <p style="font-size:0.9rem; color:var(--text-light); margin-bottom:1rem;">Hit the timer, pick a prompt, and answer out loud:</p>
+      <h3 data-i18n="prompts_title">Quick Practice Prompts</h3>
+      <p style="font-size:0.9rem; color:var(--text-light); margin-bottom:1rem;" data-i18n="prompts_subtitle">Hit the timer, pick a prompt, and answer out loud:</p>
       <div id="practice-prompts">
-        <div class="highlight" style="cursor:pointer; margin:0.5rem 0;" onclick="this.style.opacity = this.style.opacity === '0.5' ? '1' : '0.5'">Tell me about yourself and why you're interested in this role.</div>
-        <div class="highlight" style="cursor:pointer; margin:0.5rem 0;" onclick="this.style.opacity = this.style.opacity === '0.5' ? '1' : '0.5'">Describe a time you helped someone who was frustrated or confused.</div>
-        <div class="highlight" style="cursor:pointer; margin:0.5rem 0;" onclick="this.style.opacity = this.style.opacity === '0.5' ? '1' : '0.5'">How do you stay organized when working from home?</div>
-        <div class="highlight" style="cursor:pointer; margin:0.5rem 0;" onclick="this.style.opacity = this.style.opacity === '0.5' ? '1' : '0.5'">What do you know about Schmitz Cargobull?</div>
-        <div class="highlight" style="cursor:pointer; margin:0.5rem 0;" onclick="this.style.opacity = this.style.opacity === '0.5' ? '1' : '0.5'">Why are you leaving university to take this role?</div>
-        <div class="highlight" style="cursor:pointer; margin:0.5rem 0;" onclick="this.style.opacity = this.style.opacity === '0.5' ? '1' : '0.5'">A customer calls upset about a late delivery. Walk me through how you'd handle it.</div>
+        <div class="highlight" style="cursor:pointer; margin:0.5rem 0;" onclick="this.style.opacity = this.style.opacity === '0.5' ? '1' : '0.5'" data-i18n="prompt_1">Tell me about yourself and why you're interested in this role.</div>
+        <div class="highlight" style="cursor:pointer; margin:0.5rem 0;" onclick="this.style.opacity = this.style.opacity === '0.5' ? '1' : '0.5'" data-i18n="prompt_2">Describe a time you helped someone who was frustrated or confused.</div>
+        <div class="highlight" style="cursor:pointer; margin:0.5rem 0;" onclick="this.style.opacity = this.style.opacity === '0.5' ? '1' : '0.5'" data-i18n="prompt_3">How do you stay organized when working from home?</div>
+        <div class="highlight" style="cursor:pointer; margin:0.5rem 0;" onclick="this.style.opacity = this.style.opacity === '0.5' ? '1' : '0.5'" data-i18n="prompt_4">What do you know about Schmitz Cargobull?</div>
+        <div class="highlight" style="cursor:pointer; margin:0.5rem 0;" onclick="this.style.opacity = this.style.opacity === '0.5' ? '1' : '0.5'" data-i18n="prompt_5">Why are you leaving university to take this role?</div>
+        <div class="highlight" style="cursor:pointer; margin:0.5rem 0;" onclick="this.style.opacity = this.style.opacity === '0.5' ? '1' : '0.5'" data-i18n="prompt_6">A customer calls upset about a late delivery. Walk me through how you'd handle it.</div>
       </div>
-      <p style="font-size:0.82rem; color:var(--text-light); margin-top:0.5rem;">Click a prompt to mark it as done.</p>
+      <p style="font-size:0.82rem; color:var(--text-light); margin-top:0.5rem;" data-i18n="prompts_done">Click a prompt to mark it as done.</p>
     </div>
   </div>
 
   <!-- NOTES -->
   <div class="section" id="notes">
     <div class="card">
-      <h3>My Notes</h3>
-      <p style="font-size:0.9rem; color:var(--text-light); margin-bottom:0.8rem;">Jot down your own talking points, stories, or things to remember. Saved automatically in your browser.</p>
-      <textarea class="notes-area" id="notes-area" placeholder="Write your notes here...&#10;&#10;Ideas:&#10;- Your 'tell me about yourself' script&#10;- Key stories to reference&#10;- Questions to ask them&#10;- Things to remember on the day"></textarea>
-      <div class="save-indicator" id="save-indicator">Saved!</div>
+      <h3 data-i18n="notes_title">My Notes</h3>
+      <p style="font-size:0.9rem; color:var(--text-light); margin-bottom:0.8rem;" data-i18n="notes_subtitle">Jot down your own talking points, stories, or things to remember. Saved automatically in your browser.</p>
+      <textarea class="notes-area" id="notes-area" data-i18n-placeholder="notes_placeholder" placeholder="Write your notes here...&#10;&#10;Ideas:&#10;- Your 'tell me about yourself' script&#10;- Key stories to reference&#10;- Questions to ask them&#10;- Things to remember on the day"></textarea>
+      <div class="save-indicator" id="save-indicator" data-i18n="notes_saved">Saved!</div>
     </div>
 
     <div class="card">
-      <h3>Questions to Ask Them</h3>
-      <p style="font-size:0.9rem; color:var(--text-light); margin-bottom:0.8rem;">Pick 3-5 of these to ask at the end:</p>
-      <ul style="font-size:0.92rem;">
-        <li>"What does a typical day look like in this role?"</li>
-        <li>"What CRM or tools does the team use?"</li>
-        <li>"How is performance measured for this position?"</li>
-        <li>"What does the onboarding and training look like?"</li>
-        <li>"What are the working hours and shift expectations?"</li>
-        <li>"How large is the Romanian-speaking support team?"</li>
-        <li>"What does career growth look like from this role?"</li>
-        <li>"Is there an opportunity to develop my German within the role?"</li>
+      <h3 data-i18n="questions_title">Questions to Ask Them</h3>
+      <p style="font-size:0.9rem; color:var(--text-light); margin-bottom:0.8rem;" data-i18n="questions_subtitle">Pick 3-5 of these to ask at the end:</p>
+      <ul style="font-size:0.92rem;" id="questions-list">
+        <li data-i18n="q_1">"What does a typical day look like in this role?"</li>
+        <li data-i18n="q_2">"What CRM or tools does the team use?"</li>
+        <li data-i18n="q_3">"How is performance measured for this position?"</li>
+        <li data-i18n="q_4">"What does the onboarding and training look like?"</li>
+        <li data-i18n="q_5">"What are the working hours and shift expectations?"</li>
+        <li data-i18n="q_6">"How large is the Romanian-speaking support team?"</li>
+        <li data-i18n="q_7">"What does career growth look like from this role?"</li>
+        <li data-i18n="q_8">"Is there an opportunity to develop my German within the role?"</li>
       </ul>
     </div>
   </div>
@@ -726,87 +762,454 @@
 </div>
 
 <footer>
-  Built for Rafael &bull; Good luck with the interview!
+  <span data-i18n="footer">Built for Rafael &bull; Good luck with the interview!</span>
 </footer>
 
 <script>
-// Tab navigation
-const tabs = document.querySelectorAll('.tab');
-const sections = document.querySelectorAll('.section');
+// ============ TRANSLATIONS ============
+const translations = {
+  en: {
+    // Header
+    header_subtitle: "Interview Preparation",
+    header_desc: "Romanian-speaking representative \u2022 Remote role",
+    // Tabs
+    tab_strengths: "Your Strengths",
+    tab_company: "Company Info",
+    tab_flashcards: "Flashcards",
+    tab_mock: "Mock Interview",
+    tab_checklist: "Checklist",
+    tab_practice: "Practice Timer",
+    tab_notes: "My Notes",
+    // Strengths
+    str_title: "Why You're a Great Fit, Rafael",
+    str_subtitle: "Here's how your background maps to what they're looking for:",
+    str_ro_title: "Romanian (C1-C2) \u2014 Core Requirement Met",
+    str_ro_desc: "They need native or near-native Romanian. You have it. This is your #1 differentiator vs other candidates.",
+    str_en_title: "English (C1-C2) \u2014 Strong",
+    str_en_desc: "Good command of spoken and written English \u2014 check. You studied in the UK, which proves real fluency.",
+    str_de_title: "German (A2-B1) \u2014 Bonus Language",
+    str_de_desc: 'Schmitz Cargobull is a <strong>German company</strong>. Even intermediate German shows cultural alignment. Mention willingness to improve it!',
+    str_pharm_title: "Pharmacy Experience \u2014 Your Best Story",
+    str_pharm_desc: "Served customers, handled queries, processed prescriptions accurately, verified deliveries. This is the closest thing to phone support + data entry. Lead with this.",
+    str_charity_title: "Charity Shop \u2014 Customer-Facing Retail",
+    str_charity_desc: "Answering queries, assisting with purchases, maintaining standards. Shows friendly service orientation.",
+    str_ta_title: "Teaching Assistant \u2014 Communication & Patience",
+    str_ta_desc: 'One-to-one support, adapting to different learners. Perfect example for "how do you handle someone who doesn\'t understand?"',
+    str_bhf_title: "54-Mile Charity Ride \u2014 Commitment & Drive",
+    str_bhf_desc: 'Shows discipline, goal-setting, and community spirit. Aligns with their "human-centered company culture" value.',
+    str_key_label: "Key message to convey:",
+    str_key_msg: '"I bring the exact language skills you need, real customer-facing experience across three different settings, and I\'m relocating because I\'m genuinely committed to this opportunity."',
+    str_elephant_title: "Address the Elephant in the Room",
+    str_elephant_intro: "They will ask about uni. Be ready:",
+    str_elephant_answer: '"I\'ve decided to pause my studies to fully commit to a professional opportunity. I want to build real-world experience in a company where I can grow long-term. Schmitz Cargobull\'s emphasis on continuous training and internal career development is exactly what I\'m looking for at this stage."',
+    str_elephant_tip: 'Frame it as a deliberate career move, not "dropping out." You\'re <em>choosing</em> professional growth.',
+    // Company
+    comp_about_title: "About Schmitz Cargobull",
+    comp_founded_label: "Founded:",
+    comp_founded_val: "1892 in Altenberge, Germany",
+    comp_hq_label: "HQ:",
+    comp_industry_label: "Industry:",
+    comp_industry_val: "Trailer & semi-trailer manufacturing",
+    comp_position_label: "Position:",
+    comp_position_val: "Europe's leading semi-trailer manufacturer",
+    comp_employees_label: "Employees:",
+    comp_production_label: "Production:",
+    comp_production_val: "~60,000 vehicles/year",
+    comp_customers_label: "Customers:",
+    comp_customers_val: "Fleet operators, logistics companies, freight carriers, haulage firms",
+    comp_products_title: "Key Products \u2014 Know These!",
+    prod_reefer_title: "Refrigerated Trailers (Reefers)",
+    prod_reefer_desc: "Temperature-controlled trailers for transporting perishable goods (food, pharmaceuticals). Schmitz Cargobull's FERROPLAST technology is well-known. This is their flagship product line.",
+    prod_curtain_title: "Curtain-sided Trailers (Tautliners)",
+    prod_curtain_desc: "Flexible trailers with sliding curtain sides for easy side-loading. Popular for general cargo, palletised goods. Very common in European logistics.",
+    prod_box_title: "Box Trailers (Dry Freight)",
+    prod_box_desc: "Enclosed rigid-sided trailers for dry goods, furniture, electronics \u2014 anything that needs protection from weather but not temperature control.",
+    prod_container_title: "Container Chassis",
+    prod_container_desc: "Frames designed to carry shipping containers. Used in intermodal transport (ship-to-rail-to-road).",
+    prod_tipper_title: "Tipper Trailers",
+    prod_tipper_desc: "For bulk materials like grain, aggregates, and construction materials. Can tip to unload cargo.",
+    comp_digital_title: "Digital & Telematics",
+    comp_digital_desc: 'Schmitz Cargobull also offers <strong>TrailerConnect</strong> \u2014 a telematics system that lets fleet managers track trailer location, temperature, door status, and more in real-time. Mentioning you know about this shows initiative.',
+    comp_values_title: "Company Values to Reference",
+    val_quality_label: "Quality & reliability",
+    val_quality_desc: "130+ years of engineering excellence",
+    val_innovation_label: "Innovation",
+    val_innovation_desc: "telematics, lightweight construction, sustainability efforts",
+    val_customer_label: "Customer focus",
+    val_customer_desc: "strong after-sales and service network across Europe",
+    val_sustainability_label: "Sustainability",
+    val_sustainability_desc: "working on reducing transport emissions",
+    // Flashcards
+    fc_title: "Study Flashcards",
+    fc_subtitle: "Click to flip. Use arrows to navigate.",
+    fc_hint: "Click to reveal answer",
+    fc_prev: "\u2190 Prev",
+    fc_next: "Next \u2192",
+    // Mock
+    mock_title: "Mock Interview Questions",
+    mock_subtitle: "Practice answering out loud, then check the suggested answer. Rate your confidence.",
+    scenario_title: "Scenario-Based Questions",
+    s1_title: "Scenario 1: Angry customer about delayed delivery",
+    s1_desc: '"A Romanian-speaking customer calls, very frustrated, saying their trailer was supposed to arrive last week and it hasn\'t. You don\'t have access to delivery tracking. What do you do?"',
+    btn_show_approach: "Show Suggested Approach",
+    s1_answer: '<strong>1.</strong> Stay calm, listen actively, acknowledge their frustration: "I completely understand your concern, and I\'m sorry for the inconvenience."<br><br><strong>2.</strong> Gather information: order number, name, delivery address, contact details.<br><br><strong>3.</strong> Be honest: "I want to make sure you get accurate information, so I\'m going to escalate this to our logistics team who can check the exact status."<br><br><strong>4.</strong> Set expectations: "They will get back to you within [timeframe]. Can I confirm the best number to reach you on?"<br><br><strong>5.</strong> Log everything in the system for follow-up.<br><br><strong>Key:</strong> Never guess or make promises you can\'t keep. Empathy + accuracy + proper escalation.',
+    s2_title: "Scenario 2: Customer asks technical questions you can't answer",
+    s2_desc: '"A customer calls asking about the specific temperature range of the S.KO COOL refrigerated trailer and whether it\'s compatible with their fleet\'s tracking system."',
+    s2_answer: '<strong>1.</strong> Thank them for the question and show interest.<br><br><strong>2.</strong> Share what you know at a basic level: "Our refrigerated trailers are designed for a wide range of temperature-controlled transport."<br><br><strong>3.</strong> For specifics: "For the exact technical specifications and compatibility, I\'d like to connect you with our technical sales team who can give you the most accurate information."<br><br><strong>4.</strong> Offer to arrange a callback or transfer the call.<br><br><strong>Key:</strong> It\'s OK not to know everything \u2014 knowing when to escalate is a strength.',
+    btn_show_answer: "Show Suggested Answer",
+    confidence_label: "Confidence:",
+    // Checklist
+    check_title: "Interview Preparation Checklist",
+    check_progress: "{0} / {1} completed",
+    check_1: "Research Schmitz Cargobull's history and key facts",
+    check_2: "Learn the 5 main product types (reefer, curtain, box, container, tipper)",
+    check_3: 'Practice "Tell me about yourself" answer out loud (2 min max)',
+    check_4: "Prepare your pharmacy experience story (STAR format)",
+    check_5: 'Prepare answer for "Why leave university?"',
+    check_6: "Practice a self-introduction in Romanian",
+    check_7: "Prepare 3-5 questions to ask the interviewer",
+    check_8: "Review all flashcards at least twice",
+    check_9: "Do a full mock interview with a friend (20 min)",
+    check_10: "Test your microphone, webcam, and internet connection",
+    check_11: "Prepare a quiet, well-lit space for the interview",
+    check_12: "Have a copy of your CV ready to reference",
+    check_13: "Prepare a notepad and pen for notes during the interview",
+    check_14: "Pick out professional, smart-casual clothes",
+    check_15: "Get a good night's sleep before the interview",
+    // Timer
+    timer_title: "Practice Answer Timer",
+    timer_subtitle: "Use this to time your answers. Aim for 1-2 minutes per question \u2014 concise but complete.",
+    timer_sweet: "Sweet spot: 1:00 - 2:00",
+    timer_keep: "Keep going...",
+    timer_good: "Sweet spot! Good length.",
+    timer_long: "Getting long \u2014 try to wrap up.",
+    timer_start: "Start",
+    timer_pause: "Pause",
+    timer_resume: "Resume",
+    timer_reset: "Reset",
+    prompts_title: "Quick Practice Prompts",
+    prompts_subtitle: "Hit the timer, pick a prompt, and answer out loud:",
+    prompt_1: "Tell me about yourself and why you're interested in this role.",
+    prompt_2: "Describe a time you helped someone who was frustrated or confused.",
+    prompt_3: "How do you stay organized when working from home?",
+    prompt_4: "What do you know about Schmitz Cargobull?",
+    prompt_5: "Why are you leaving university to take this role?",
+    prompt_6: "A customer calls upset about a late delivery. Walk me through how you'd handle it.",
+    prompts_done: "Click a prompt to mark it as done.",
+    // Notes
+    notes_title: "My Notes",
+    notes_subtitle: "Jot down your own talking points, stories, or things to remember. Saved automatically in your browser.",
+    notes_placeholder: "Write your notes here...\n\nIdeas:\n- Your 'tell me about yourself' script\n- Key stories to reference\n- Questions to ask them\n- Things to remember on the day",
+    notes_saved: "Saved!",
+    questions_title: "Questions to Ask Them",
+    questions_subtitle: "Pick 3-5 of these to ask at the end:",
+    q_1: '"What does a typical day look like in this role?"',
+    q_2: '"What CRM or tools does the team use?"',
+    q_3: '"How is performance measured for this position?"',
+    q_4: '"What does the onboarding and training look like?"',
+    q_5: '"What are the working hours and shift expectations?"',
+    q_6: '"How large is the Romanian-speaking support team?"',
+    q_7: '"What does career growth look like from this role?"',
+    q_8: '"Is there an opportunity to develop my German within the role?"',
+    footer: "Built for Rafael \u2022 Good luck with the interview!",
+    // Flashcard data
+    flashcards: [
+      { q: "When was Schmitz Cargobull founded?", a: "<strong>1892</strong> \u2014 over 130 years ago. Founded in Altenberge, Germany. Now headquartered in Horstmar, North Rhine-Westphalia." },
+      { q: "What are the 5 main product types?", a: "<strong>1.</strong> Refrigerated trailers (reefers)<br><strong>2.</strong> Curtain-sided trailers (tautliners)<br><strong>3.</strong> Box trailers (dry freight)<br><strong>4.</strong> Container chassis<br><strong>5.</strong> Tipper trailers" },
+      { q: "What is TrailerConnect?", a: "Schmitz Cargobull's <strong>telematics system</strong>. It lets fleet managers track trailer location, temperature, door status, and more in real-time. Shows the company's digital innovation." },
+      { q: "Who are Schmitz Cargobull's customers?", a: "<strong>Fleet operators, logistics companies, freight carriers, and haulage firms</strong> across Europe. Anyone who needs to transport goods by road." },
+      { q: "What's a reefer trailer used for?", a: "<strong>Temperature-controlled transport</strong> of perishable goods: food, dairy, meat, pharmaceuticals. Maintains specific temperatures during transit. Schmitz Cargobull's FERROPLAST tech is well-known." },
+      { q: "Why are you leaving university for this role?", a: "I've decided to <strong>pause my studies to commit fully</strong> to a professional opportunity. I want to build real-world experience in a company where I can grow long-term. Schmitz Cargobull's emphasis on continuous training and career development is exactly what I'm looking for." },
+      { q: "What's your biggest strength for this role?", a: "My <strong>trilingual ability</strong> (Romanian C1-C2, English C1-C2, German A2-B1) combined with hands-on customer service experience across pharmacy, retail, and education. I'm used to helping people and staying accurate under pressure." },
+      { q: "How do you handle a question you can't answer?", a: "<strong>1.</strong> Acknowledge the question<br><strong>2.</strong> Be honest: 'I want to give you accurate information'<br><strong>3.</strong> Take their details<br><strong>4.</strong> Escalate to the right team<br><strong>5.</strong> Set a callback expectation<br><strong>6.</strong> Log everything for follow-up" },
+      { q: "What does 'first-line customer support' mean?", a: "You're the <strong>first point of contact</strong> for customers. You handle initial queries, gather information, resolve simple issues, and escalate complex ones to specialised teams (sales, technical, after-sales)." },
+      { q: "How will you manage working fully remotely?", a: "<strong>Dedicated workspace</strong>, consistent routine, clear daily goals. I already manage independent study at university. I'm disciplined with time management and comfortable with digital communication tools." },
+      { q: "What languages do you speak?", a: "<strong>Romanian</strong> (C1-C2, fluent)<br><strong>English</strong> (C1-C2, fluent \u2014 studied in UK)<br><strong>German</strong> (A2-B1, intermediate \u2014 eager to improve)<br><br>The German is a bonus for a German-headquartered company!" },
+      { q: "Describe your pharmacy experience in one sentence.", a: "I served customers in a busy community pharmacy, <strong>handling queries, processing prescriptions accurately, and verifying stock deliveries</strong> \u2014 all in a fast-paced environment where precision mattered." },
+    ],
+    // Mock Q&A
+    mockQuestions: [
+      { q: "Tell me about yourself.", a: "I'm Rafael, I'm originally from Romania and I've been living in the UK where I've built hands-on experience in customer service across pharmacy, retail, and education. I speak fluent Romanian and English, plus intermediate German. I'm now looking to relocate and commit fully to a professional role where I can grow. Schmitz Cargobull's focus on training and career development, plus the chance to use my language skills daily, makes this an exciting opportunity for me." },
+      { q: "Why do you want to work for Schmitz Cargobull?", a: "Schmitz Cargobull has over 130 years of history and is Europe's leading trailer manufacturer \u2014 that's a company with real stability and reputation. I'm drawn to the multicultural team, the remote flexibility, and especially the focus on professional development. The fact that it's a German company is a bonus for me since I'm also learning German and would love to develop that further." },
+      { q: "You don't have call center experience. Why should we hire you?", a: "While I haven't worked in a formal call center, every role I've had has been customer-facing. At the pharmacy, I served customers daily in a fast-paced setting \u2014 handling queries, processing prescriptions accurately, and staying calm under pressure. As a teaching assistant, I learned to communicate patiently and adapt to different people. I'm a fast learner and I'm confident these skills translate directly to phone support." },
+      { q: "How do you handle working independently from home?", a: "I'm already used to independent work from my university studies \u2014 managing deadlines, doing research, and staying disciplined without someone looking over my shoulder. For remote work specifically, I set up a dedicated workspace, keep a consistent routine, and I'm proactive about communicating with my team. I take reliability seriously." },
+      { q: "Tell me about a time you dealt with a difficult situation at work.", a: "At the pharmacy, I had a customer who was frustrated because their prescription wasn't ready yet. I stayed calm, acknowledged their frustration, checked the status with the dispenser, and explained the situation clearly. I offered to call them as soon as it was ready. They left much calmer. I learned that listening and being honest \u2014 even when you don't have the answer they want \u2014 goes a long way." },
+      { q: "Where do you see yourself in 2-3 years?", a: "I'd love to grow within Schmitz Cargobull. The job description mentions internal career development, and that really appeals to me. I could see myself developing deeper product expertise, maybe moving into a team lead or specialist role over time. I'm also keen to improve my German, which could open up more opportunities within the company." },
+      { q: "Why are you relocating?", a: "I'm ready for a new chapter. I want to fully commit to building my career in a professional environment, and this role aligns perfectly with my language skills and customer service background. Relocating shows I'm serious about this opportunity \u2014 it's a deliberate choice, not a fallback." },
+    ],
+  },
+  ro: {
+    // Header
+    header_subtitle: "Pregătire pentru Interviu",
+    header_desc: "Reprezentant vorbitor de română \u2022 Rol remote",
+    // Tabs
+    tab_strengths: "Punctele Tale Forte",
+    tab_company: "Despre Companie",
+    tab_flashcards: "Flashcard-uri",
+    tab_mock: "Simulare Interviu",
+    tab_checklist: "Checklist",
+    tab_practice: "Cronometru",
+    tab_notes: "Notițele Mele",
+    // Strengths
+    str_title: "De ce ești potrivit pentru acest rol, Rafael",
+    str_subtitle: "Iată cum experiența ta se potrivește cu ceea ce caută ei:",
+    str_ro_title: "Română (C1-C2) \u2014 Cerință principală îndeplinită",
+    str_ro_desc: "Au nevoie de română la nivel nativ sau aproape nativ. Tu o ai. Acesta este principalul tău avantaj față de ceilalți candidați.",
+    str_en_title: "Engleză (C1-C2) \u2014 Nivel ridicat",
+    str_en_desc: "Bună stăpânire a limbii engleze, scris și vorbit \u2014 bifat. Ai studiat în Marea Britanie, ceea ce dovedește fluență reală.",
+    str_de_title: "Germană (A2-B1) \u2014 Limbă bonus",
+    str_de_desc: 'Schmitz Cargobull este o <strong>companie germană</strong>. Chiar și germana la nivel intermediar arată aliniere culturală. Menționează dorința de a o îmbunătăți!',
+    str_pharm_title: "Experiența în Farmacie \u2014 Cea mai bună poveste a ta",
+    str_pharm_desc: "Ai servit clienți, ai răspuns la întrebări, ai procesat rețete cu precizie, ai verificat livrări. Aceasta este cea mai apropiată experiență de suport telefonic + introducere date. Pune accent pe asta.",
+    str_charity_title: "Magazin de Caritate \u2014 Retail cu clienți",
+    str_charity_desc: "Răspunsuri la întrebări, asistență la cumpărături, menținerea standardelor. Arată orientare prietenoasă către servicii.",
+    str_ta_title: "Asistent Didactic \u2014 Comunicare și Răbdare",
+    str_ta_desc: 'Suport individual, adaptare la diferiți elevi. Exemplu perfect pentru „cum gestionezi pe cineva care nu înțelege?"',
+    str_bhf_title: "Cursă de Caritate de 87 km \u2014 Dedicare și Motivație",
+    str_bhf_desc: 'Arată disciplină, stabilirea obiectivelor și spirit comunitar. Se aliniază cu valoarea lor de „cultură organizațională centrată pe oameni".',
+    str_key_label: "Mesajul cheie de transmis:",
+    str_key_msg: '„Aduc exact abilitățile lingvistice de care aveți nevoie, experiență reală cu clienții în trei medii diferite, și mă mut pentru că sunt cu adevărat dedicat acestei oportunități."',
+    str_elephant_title: "Abordează Subiectul Dificil",
+    str_elephant_intro: "Te vor întreba despre facultate. Fii pregătit:",
+    str_elephant_answer: '„Am decis să îmi pun studiile pe pauză pentru a mă dedica complet unei oportunități profesionale. Vreau să îmi construiesc experiență reală într-o companie unde pot crește pe termen lung. Accentul pe care Schmitz Cargobull îl pune pe formare continuă și dezvoltare internă a carierei este exact ceea ce caut în această etapă."',
+    str_elephant_tip: 'Prezintă-o ca o decizie deliberată de carieră, nu ca „abandon". Tu <em>alegi</em> creșterea profesională.',
+    // Company
+    comp_about_title: "Despre Schmitz Cargobull",
+    comp_founded_label: "Fondată:",
+    comp_founded_val: "1892 în Altenberge, Germania",
+    comp_hq_label: "Sediu:",
+    comp_industry_label: "Industrie:",
+    comp_industry_val: "Producție de remorci și semiremorci",
+    comp_position_label: "Poziție:",
+    comp_position_val: "Liderul european în producția de semiremorci",
+    comp_employees_label: "Angajați:",
+    comp_production_label: "Producție:",
+    comp_production_val: "~60.000 vehicule/an",
+    comp_customers_label: "Clienți:",
+    comp_customers_val: "Operatori de flote, companii de logistică, transportatori de mărfuri",
+    comp_products_title: "Produse Cheie \u2014 Trebuie să le cunoști!",
+    prod_reefer_title: "Remorci Frigorifice (Reefers)",
+    prod_reefer_desc: "Remorci cu temperatură controlată pentru transportul bunurilor perisabile (alimente, produse farmaceutice). Tehnologia FERROPLAST a Schmitz Cargobull este bine cunoscută. Aceasta este linia lor de produse principală.",
+    prod_curtain_title: "Remorci cu Prelată Laterală (Tautliners)",
+    prod_curtain_desc: "Remorci flexibile cu prelate laterale glisante pentru încărcare laterală ușoară. Populare pentru marfă generală, bunuri paletizate. Foarte comune în logistica europeană.",
+    prod_box_title: "Remorci Furgon (Marfă Uscată)",
+    prod_box_desc: "Remorci închise cu pereți rigizi pentru bunuri uscate, mobilă, electronice \u2014 orice necesită protecție împotriva vremii dar nu control al temperaturii.",
+    prod_container_title: "Șasiuri pentru Containere",
+    prod_container_desc: "Cadre proiectate pentru transportul containerelor maritime. Folosite în transportul intermodal (navă-tren-drum).",
+    prod_tipper_title: "Remorci Basculante",
+    prod_tipper_desc: "Pentru materiale în vrac precum cereale, agregate și materiale de construcție. Se pot bascula pentru descărcarea mărfii.",
+    comp_digital_title: "Digital și Telematică",
+    comp_digital_desc: 'Schmitz Cargobull oferă și <strong>TrailerConnect</strong> \u2014 un sistem telematic care permite managerilor de flotă să urmărească locația remorcii, temperatura, starea ușilor și multe altele în timp real. Menționarea acestui lucru arată inițiativă.',
+    comp_values_title: "Valorile Companiei de Menționat",
+    val_quality_label: "Calitate și fiabilitate",
+    val_quality_desc: "peste 130 de ani de excelență inginerească",
+    val_innovation_label: "Inovație",
+    val_innovation_desc: "telematică, construcție ușoară, eforturi de sustenabilitate",
+    val_customer_label: "Orientare către client",
+    val_customer_desc: "rețea puternică de after-sales și service în toată Europa",
+    val_sustainability_label: "Sustenabilitate",
+    val_sustainability_desc: "lucrează la reducerea emisiilor din transport",
+    // Flashcards
+    fc_title: "Flashcard-uri de Studiu",
+    fc_subtitle: "Click pentru a întoarce. Folosește săgețile pentru navigare.",
+    fc_hint: "Click pentru a vedea răspunsul",
+    fc_prev: "\u2190 Anterior",
+    fc_next: "Următor \u2192",
+    // Mock
+    mock_title: "Întrebări Simulare Interviu",
+    mock_subtitle: "Exersează răspunzând cu voce tare, apoi verifică răspunsul sugerat. Evaluează-ți încrederea.",
+    scenario_title: "Întrebări Bazate pe Scenarii",
+    s1_title: "Scenariul 1: Client supărat din cauza unei livrări întârziate",
+    s1_desc: '„Un client vorbitor de română sună, foarte frustrat, spunând că remorca sa trebuia să ajungă săptămâna trecută și nu a ajuns. Nu ai acces la urmărirea livrărilor. Ce faci?"',
+    btn_show_approach: "Arată Abordarea Sugerată",
+    s1_answer: '<strong>1.</strong> Stai calm, ascultă activ, recunoaște frustrarea lor: „Înțeleg perfect preocuparea dumneavoastră și îmi cer scuze pentru neplăcere."<br><br><strong>2.</strong> Colectează informații: număr comandă, nume, adresă de livrare, date de contact.<br><br><strong>3.</strong> Fii sincer: „Vreau să mă asigur că primiți informații corecte, așa că voi escalada acest lucru către echipa noastră de logistică care poate verifica statusul exact."<br><br><strong>4.</strong> Stabilește așteptări: „Vă vor contacta în [interval de timp]. Pot confirma cel mai bun număr la care vă pot contacta?"<br><br><strong>5.</strong> Înregistrează totul în sistem pentru urmărire.<br><br><strong>Cheie:</strong> Nu ghici niciodată și nu face promisiuni pe care nu le poți ține. Empatie + acuratețe + escaladare corectă.',
+    s2_title: "Scenariul 2: Clientul pune întrebări tehnice la care nu poți răspunde",
+    s2_desc: '„Un client sună întrebând despre intervalul specific de temperatură al remorcii frigorifice S.KO COOL și dacă este compatibilă cu sistemul de urmărire al flotei lor."',
+    s2_answer: '<strong>1.</strong> Mulțumește-le pentru întrebare și arată interes.<br><br><strong>2.</strong> Împărtășește ce știi la nivel de bază: „Remorcile noastre frigorifice sunt proiectate pentru o gamă largă de transport cu temperatură controlată."<br><br><strong>3.</strong> Pentru detalii specifice: „Pentru specificațiile tehnice exacte și compatibilitate, aș dori să vă conectez cu echipa noastră tehnică de vânzări care vă poate oferi cele mai precise informații."<br><br><strong>4.</strong> Oferă-te să aranjezi un apel de răspuns sau să transferi apelul.<br><br><strong>Cheie:</strong> E OK să nu știi totul \u2014 a ști când să escaladezi este un punct forte.',
+    btn_show_answer: "Arată Răspunsul Sugerat",
+    confidence_label: "Încredere:",
+    // Checklist
+    check_title: "Checklist Pregătire Interviu",
+    check_progress: "{0} / {1} completate",
+    check_1: "Cercetează istoria și faptele cheie ale Schmitz Cargobull",
+    check_2: "Învață cele 5 tipuri principale de produse (frigorifică, prelată, furgon, container, basculantă)",
+    check_3: 'Exersează răspunsul la „Spune-mi despre tine" cu voce tare (max 2 min)',
+    check_4: "Pregătește povestea experienței din farmacie (format STAR)",
+    check_5: 'Pregătește răspunsul pentru „De ce pleci de la facultate?"',
+    check_6: "Exersează o autoprezentare în română",
+    check_7: "Pregătește 3-5 întrebări de pus intervievatorului",
+    check_8: "Revizuiește toate flashcard-urile de cel puțin două ori",
+    check_9: "Fă o simulare completă de interviu cu un prieten (20 min)",
+    check_10: "Testează microfonul, camera web și conexiunea la internet",
+    check_11: "Pregătește un spațiu liniștit și bine iluminat pentru interviu",
+    check_12: "Ai o copie a CV-ului la îndemână",
+    check_13: "Pregătește un bloc de notițe și un pix pentru notițe în timpul interviului",
+    check_14: "Alege haine profesionale, smart-casual",
+    check_15: "Dormi bine în noaptea dinaintea interviului",
+    // Timer
+    timer_title: "Cronometru pentru Exersare",
+    timer_subtitle: "Folosește-l pentru a-ți cronometra răspunsurile. Țintește 1-2 minute pe întrebare \u2014 concis dar complet.",
+    timer_sweet: "Zona ideală: 1:00 - 2:00",
+    timer_keep: "Continuă...",
+    timer_good: "Zona ideală! Durată bună.",
+    timer_long: "Se lungește \u2014 încearcă să închei.",
+    timer_start: "Start",
+    timer_pause: "Pauză",
+    timer_resume: "Continuă",
+    timer_reset: "Resetare",
+    prompts_title: "Exerciții Rapide",
+    prompts_subtitle: "Pornește cronometrul, alege un exercițiu și răspunde cu voce tare:",
+    prompt_1: "Spune-mi despre tine și de ce ești interesat de acest rol.",
+    prompt_2: "Descrie o situație în care ai ajutat pe cineva frustrat sau confuz.",
+    prompt_3: "Cum te organizezi când lucrezi de acasă?",
+    prompt_4: "Ce știi despre Schmitz Cargobull?",
+    prompt_5: "De ce pleci de la facultate pentru acest rol?",
+    prompt_6: "Un client sună supărat din cauza unei livrări întârziate. Explică-mi cum ai gestiona situația.",
+    prompts_done: "Click pe un exercițiu pentru a-l marca ca făcut.",
+    // Notes
+    notes_title: "Notițele Mele",
+    notes_subtitle: "Notează-ți propriile puncte de discuție, povești sau lucruri de reținut. Se salvează automat în browser.",
+    notes_placeholder: "Scrie notițele tale aici...\n\nIdei:\n- Scriptul tău pentru „spune-mi despre tine"\n- Povești cheie de referință\n- Întrebări de pus lor\n- Lucruri de reținut în ziua interviului",
+    notes_saved: "Salvat!",
+    questions_title: "Întrebări de Pus Lor",
+    questions_subtitle: "Alege 3-5 dintre acestea pentru a le pune la final:",
+    q_1: '„Cum arată o zi tipică în acest rol?"',
+    q_2: '„Ce CRM sau instrumente folosește echipa?"',
+    q_3: '„Cum este măsurată performanța pentru această poziție?"',
+    q_4: '„Cum arată procesul de onboarding și training?"',
+    q_5: '„Care sunt orele de lucru și așteptările privind turele?"',
+    q_6: '„Cât de mare este echipa de suport vorbitoare de română?"',
+    q_7: '„Cum arată dezvoltarea carierei din acest rol?"',
+    q_8: '„Există oportunitatea de a-mi dezvolta germana în cadrul rolului?"',
+    footer: "Creat pentru Rafael \u2022 Succes la interviu!",
+    // Flashcard data
+    flashcards: [
+      { q: "Când a fost fondată Schmitz Cargobull?", a: "<strong>1892</strong> \u2014 acum peste 130 de ani. Fondată în Altenberge, Germania. Acum cu sediul în Horstmar, Renania de Nord-Westfalia." },
+      { q: "Care sunt cele 5 tipuri principale de produse?", a: "<strong>1.</strong> Remorci frigorifice (reefers)<br><strong>2.</strong> Remorci cu prelată laterală (tautliners)<br><strong>3.</strong> Remorci furgon (marfă uscată)<br><strong>4.</strong> Șasiuri pentru containere<br><strong>5.</strong> Remorci basculante" },
+      { q: "Ce este TrailerConnect?", a: "<strong>Sistemul telematic</strong> al Schmitz Cargobull. Permite managerilor de flotă să urmărească locația remorcii, temperatura, starea ușilor și multe altele în timp real. Arată inovația digitală a companiei." },
+      { q: "Cine sunt clienții Schmitz Cargobull?", a: "<strong>Operatori de flote, companii de logistică, transportatori de mărfuri</strong> din toată Europa. Oricine are nevoie să transporte bunuri pe drum." },
+      { q: "Pentru ce se folosește o remorcă frigorifică?", a: "<strong>Transport cu temperatură controlată</strong> pentru bunuri perisabile: alimente, lactate, carne, produse farmaceutice. Menține temperaturi specifice în timpul tranzitului. Tehnologia FERROPLAST de la Schmitz Cargobull este bine cunoscută." },
+      { q: "De ce pleci de la facultate pentru acest rol?", a: "Am decis să <strong>îmi pun studiile pe pauză pentru a mă dedica complet</strong> unei oportunități profesionale. Vreau să construiesc experiență reală într-o companie unde pot crește pe termen lung. Accentul Schmitz Cargobull pe formarea continuă și dezvoltarea carierei este exact ceea ce caut." },
+      { q: "Care este cel mai mare punct forte al tău pentru acest rol?", a: "<strong>Abilitatea trilingvă</strong> (română C1-C2, engleză C1-C2, germană A2-B1) combinată cu experiență practică în servicii clienți în farmacie, retail și educație. Sunt obișnuit să ajut oamenii și să fiu precis sub presiune." },
+      { q: "Cum gestionezi o întrebare la care nu poți răspunde?", a: "<strong>1.</strong> Recunoaște întrebarea<br><strong>2.</strong> Fii sincer: „Vreau să vă ofer informații corecte"<br><strong>3.</strong> Ia-le datele<br><strong>4.</strong> Escaladează către echipa potrivită<br><strong>5.</strong> Stabilește așteptări pentru răspuns<br><strong>6.</strong> Înregistrează totul pentru urmărire" },
+      { q: "Ce înseamnă „suport clienți de primă linie"?", a: "Ești <strong>primul punct de contact</strong> pentru clienți. Gestionezi întrebările inițiale, colectezi informații, rezolvi probleme simple și escaladezi pe cele complexe către echipe specializate (vânzări, tehnic, after-sales)." },
+      { q: "Cum vei gestiona munca complet de la distanță?", a: "<strong>Spațiu de lucru dedicat</strong>, rutină constantă, obiective zilnice clare. Deja gestionez studiul independent la universitate. Sunt disciplinat cu managementul timpului și confortabil cu instrumentele de comunicare digitală." },
+      { q: "Ce limbi vorbești?", a: "<strong>Română</strong> (C1-C2, fluent)<br><strong>Engleză</strong> (C1-C2, fluent \u2014 am studiat în UK)<br><strong>Germană</strong> (A2-B1, intermediar \u2014 dornic să îmbunătățesc)<br><br>Germana este un bonus pentru o companie cu sediul în Germania!" },
+      { q: "Descrie experiența ta din farmacie într-o propoziție.", a: "Am servit clienți într-o farmacie comunitară aglomerată, <strong>gestionând întrebări, procesând rețete cu precizie și verificând livrările de stocuri</strong> \u2014 totul într-un mediu rapid unde precizia conta." },
+    ],
+    // Mock Q&A
+    mockQuestions: [
+      { q: "Spune-mi despre tine.", a: "Sunt Rafael, sunt din România și am locuit în Marea Britanie unde am acumulat experiență practică în servicii clienți în farmacie, retail și educație. Vorbesc fluent română și engleză, plus germană la nivel intermediar. Acum vreau să mă mut și să mă dedic complet unui rol profesional unde pot crește. Accentul Schmitz Cargobull pe formare și dezvoltarea carierei, plus șansa de a-mi folosi abilitățile lingvistice zilnic, face din aceasta o oportunitate entuziasmantă pentru mine." },
+      { q: "De ce vrei să lucrezi la Schmitz Cargobull?", a: "Schmitz Cargobull are peste 130 de ani de istorie și este liderul european în producția de semiremorci \u2014 este o companie cu stabilitate și reputație reale. Mă atrage echipa multiculturală, flexibilitatea muncii remote și mai ales accentul pe dezvoltarea profesională. Faptul că este o companie germană este un bonus pentru mine, deoarece învăț și germana și mi-ar plăcea să o dezvolt mai mult." },
+      { q: "Nu ai experiență în call center. De ce ar trebui să te angajăm?", a: "Deși nu am lucrat într-un call center formal, fiecare rol pe care l-am avut a fost orientat către clienți. La farmacie, am servit clienți zilnic într-un mediu rapid \u2014 gestionând întrebări, procesând rețete cu precizie și păstrându-mi calmul sub presiune. Ca asistent didactic, am învățat să comunic cu răbdare și să mă adaptez la diferiți oameni. Învăț rapid și sunt încrezător că aceste abilități se traduc direct în suport telefonic." },
+      { q: "Cum gestionezi munca independentă de acasă?", a: "Sunt deja obișnuit cu munca independentă din studiile universitare \u2014 gestionez termene limită, fac cercetare și rămân disciplinat fără cineva care să mă supravegheze. Pentru munca remote în mod specific, îmi configurez un spațiu de lucru dedicat, mențin o rutină consistentă și sunt proactiv în comunicarea cu echipa mea. Iau fiabilitatea în serios." },
+      { q: "Povestește-mi despre o situație dificilă de la muncă.", a: "La farmacie, am avut un client frustrat pentru că rețeta lui nu era gata încă. Am rămas calm, i-am recunoscut frustrarea, am verificat statusul cu farmacistul și am explicat situația clar. M-am oferit să îl sun imediat ce era gata. A plecat mult mai calm. Am învățat că ascultarea și sinceritatea \u2014 chiar și când nu ai răspunsul pe care îl vor \u2014 contează enorm." },
+      { q: "Unde te vezi în 2-3 ani?", a: "Mi-ar plăcea să cresc în cadrul Schmitz Cargobull. Descrierea jobului menționează dezvoltarea internă a carierei, și asta mă atrage foarte mult. M-aș putea vedea dezvoltând o expertiză mai profundă în produse, poate trecând într-un rol de team lead sau specialist în timp. De asemenea, sunt dornic să îmi îmbunătățesc germana, ceea ce ar putea deschide mai multe oportunități în cadrul companiei." },
+      { q: "De ce te muți?", a: "Sunt pregătit pentru un nou capitol. Vreau să mă dedic complet construirii carierei într-un mediu profesional, iar acest rol se aliniază perfect cu abilitățile mele lingvistice și experiența în servicii clienți. Mutarea arată că sunt serios în privința acestei oportunități \u2014 este o alegere deliberată, nu o variantă de rezervă." },
+    ],
+  }
+};
 
-tabs.forEach(tab => {
+// ============ i18n ENGINE ============
+let currentLang = localStorage.getItem('rafael-lang') || 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('rafael-lang', lang);
+
+  // Update toggle buttons
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim() === lang.toUpperCase());
+  });
+
+  // Update HTML lang
+  document.documentElement.lang = lang;
+
+  const t = translations[lang];
+
+  // Update all data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) {
+      el.innerHTML = t[key];
+    }
+  });
+
+  // Update placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (t[key] !== undefined) {
+      el.placeholder = t[key];
+    }
+  });
+
+  // Re-render flashcards
+  renderCard();
+
+  // Re-render mock questions
+  renderMockQuestions();
+
+  // Update progress text
+  updateProgress();
+}
+
+// ============ TAB NAVIGATION ============
+const tabButtons = document.querySelectorAll('.tab');
+const sectionElements = document.querySelectorAll('.section');
+
+tabButtons.forEach(tab => {
   tab.addEventListener('click', () => {
-    tabs.forEach(t => t.classList.remove('active'));
-    sections.forEach(s => s.classList.remove('active'));
+    tabButtons.forEach(t => t.classList.remove('active'));
+    sectionElements.forEach(s => s.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById(tab.dataset.tab).classList.add('active');
   });
 });
 
-// Flashcards
-const flashcards = [
-  { q: "When was Schmitz Cargobull founded?", a: "<strong>1892</strong> — over 130 years ago. Founded in Altenberge, Germany. Now headquartered in Horstmar, North Rhine-Westphalia." },
-  { q: "What are the 5 main product types?", a: "<strong>1.</strong> Refrigerated trailers (reefers)<br><strong>2.</strong> Curtain-sided trailers (tautliners)<br><strong>3.</strong> Box trailers (dry freight)<br><strong>4.</strong> Container chassis<br><strong>5.</strong> Tipper trailers" },
-  { q: "What is TrailerConnect?", a: "Schmitz Cargobull's <strong>telematics system</strong>. It lets fleet managers track trailer location, temperature, door status, and more in real-time. Shows the company's digital innovation." },
-  { q: "Who are Schmitz Cargobull's customers?", a: "<strong>Fleet operators, logistics companies, freight carriers, and haulage firms</strong> across Europe. Anyone who needs to transport goods by road." },
-  { q: "What's a reefer trailer used for?", a: "<strong>Temperature-controlled transport</strong> of perishable goods: food, dairy, meat, pharmaceuticals. Maintains specific temperatures during transit. Schmitz Cargobull's FERROPLAST tech is well-known." },
-  { q: "Why are you leaving university for this role?", a: "I've decided to <strong>pause my studies to commit fully</strong> to a professional opportunity. I want to build real-world experience in a company where I can grow long-term. Schmitz Cargobull's emphasis on continuous training and career development is exactly what I'm looking for." },
-  { q: "What's your biggest strength for this role?", a: "My <strong>trilingual ability</strong> (Romanian C1-C2, English C1-C2, German A2-B1) combined with hands-on customer service experience across pharmacy, retail, and education. I'm used to helping people and staying accurate under pressure." },
-  { q: "How do you handle a question you can't answer?", a: "<strong>1.</strong> Acknowledge the question<br><strong>2.</strong> Be honest: 'I want to give you accurate information'<br><strong>3.</strong> Take their details<br><strong>4.</strong> Escalate to the right team<br><strong>5.</strong> Set a callback expectation<br><strong>6.</strong> Log everything for follow-up" },
-  { q: "What does 'first-line customer support' mean?", a: "You're the <strong>first point of contact</strong> for customers. You handle initial queries, gather information, resolve simple issues, and escalate complex ones to specialised teams (sales, technical, after-sales)." },
-  { q: "How will you manage working fully remotely?", a: "<strong>Dedicated workspace</strong>, consistent routine, clear daily goals. I already manage independent study at university. I'm disciplined with time management and comfortable with digital communication tools." },
-  { q: "What languages do you speak?", a: "<strong>Romanian</strong> (C1-C2, fluent)<br><strong>English</strong> (C1-C2, fluent — studied in UK)<br><strong>German</strong> (A2-B1, intermediate — eager to improve)<br><br>The German is a bonus for a German-headquartered company!" },
-  { q: "Describe your pharmacy experience in one sentence.", a: "I served customers in a busy community pharmacy, <strong>handling queries, processing prescriptions accurately, and verifying stock deliveries</strong> — all in a fast-paced environment where precision mattered." },
-];
-
+// ============ FLASHCARDS ============
 let currentCard = 0;
 
 function renderCard() {
-  document.getElementById('fc-question').textContent = flashcards[currentCard].q;
-  document.getElementById('fc-answer').innerHTML = flashcards[currentCard].a;
-  document.getElementById('fc-counter').textContent = `${currentCard + 1} / ${flashcards.length}`;
+  const cards = translations[currentLang].flashcards;
+  document.getElementById('fc-question').textContent = cards[currentCard].q;
+  document.getElementById('fc-answer').innerHTML = cards[currentCard].a;
+  document.getElementById('fc-counter').textContent = `${currentCard + 1} / ${cards.length}`;
   document.getElementById('flashcard').classList.remove('flipped');
 }
 
 function flipCard() { document.getElementById('flashcard').classList.toggle('flipped'); }
 
 function nextCard() {
-  currentCard = (currentCard + 1) % flashcards.length;
+  const cards = translations[currentLang].flashcards;
+  currentCard = (currentCard + 1) % cards.length;
   renderCard();
 }
 
 function prevCard() {
-  currentCard = (currentCard - 1 + flashcards.length) % flashcards.length;
+  const cards = translations[currentLang].flashcards;
+  currentCard = (currentCard - 1 + cards.length) % cards.length;
   renderCard();
 }
 
-renderCard();
-
-// Mock interview questions
-const mockQuestions = [
-  { q: "Tell me about yourself.", a: "I'm Rafael, I'm originally from Romania and I've been living in the UK where I've built hands-on experience in customer service across pharmacy, retail, and education. I speak fluent Romanian and English, plus intermediate German. I'm now looking to relocate and commit fully to a professional role where I can grow. Schmitz Cargobull's focus on training and career development, plus the chance to use my language skills daily, makes this an exciting opportunity for me." },
-  { q: "Why do you want to work for Schmitz Cargobull?", a: "Schmitz Cargobull has over 130 years of history and is Europe's leading trailer manufacturer — that's a company with real stability and reputation. I'm drawn to the multicultural team, the remote flexibility, and especially the focus on professional development. The fact that it's a German company is a bonus for me since I'm also learning German and would love to develop that further." },
-  { q: "You don't have call center experience. Why should we hire you?", a: "While I haven't worked in a formal call center, every role I've had has been customer-facing. At the pharmacy, I served customers daily in a fast-paced setting — handling queries, processing prescriptions accurately, and staying calm under pressure. As a teaching assistant, I learned to communicate patiently and adapt to different people. I'm a fast learner and I'm confident these skills translate directly to phone support." },
-  { q: "How do you handle working independently from home?", a: "I'm already used to independent work from my university studies — managing deadlines, doing research, and staying disciplined without someone looking over my shoulder. For remote work specifically, I set up a dedicated workspace, keep a consistent routine, and I'm proactive about communicating with my team. I take reliability seriously." },
-  { q: "Tell me about a time you dealt with a difficult situation at work.", a: "At the pharmacy, I had a customer who was frustrated because their prescription wasn't ready yet. I stayed calm, acknowledged their frustration, checked the status with the dispenser, and explained the situation clearly. I offered to call them as soon as it was ready. They left much calmer. I learned that listening and being honest — even when you don't have the answer they want — goes a long way." },
-  { q: "Where do you see yourself in 2-3 years?", a: "I'd love to grow within Schmitz Cargobull. The job description mentions internal career development, and that really appeals to me. I could see myself developing deeper product expertise, maybe moving into a team lead or specialist role over time. I'm also keen to improve my German, which could open up more opportunities within the company." },
-  { q: "Why are you relocating?", a: "I'm ready for a new chapter. I want to fully commit to building my career in a professional environment, and this role aligns perfectly with my language skills and customer service background. Relocating shows I'm serious about this opportunity — it's a deliberate choice, not a fallback." },
-];
-
-const mockContainer = document.getElementById('mock-questions');
-mockQuestions.forEach((mq, i) => {
-  mockContainer.innerHTML += `
-    <div class="question-block">
-      <h4>Q${i+1}: ${mq.q}</h4>
-      <button class="answer-toggle" onclick="toggleAnswer('mq${i}')">Show Suggested Answer</button>
-      <div class="sample-answer" id="mq${i}">${mq.a}</div>
-      <div class="self-rate">
-        <span>Confidence:</span>
-        ${[1,2,3,4,5].map(n => `<button class="rate-btn" onclick="rate(this)">${n}</button>`).join('')}
+// ============ MOCK INTERVIEW ============
+function renderMockQuestions() {
+  const t = translations[currentLang];
+  const container = document.getElementById('mock-questions');
+  container.innerHTML = '';
+  t.mockQuestions.forEach((mq, i) => {
+    container.innerHTML += `
+      <div class="question-block">
+        <h4>Q${i+1}: ${mq.q}</h4>
+        <button class="answer-toggle" onclick="toggleAnswer('mq${i}')">${t.btn_show_answer}</button>
+        <div class="sample-answer" id="mq${i}">${mq.a}</div>
+        <div class="self-rate">
+          <span>${t.confidence_label}</span>
+          ${[1,2,3,4,5].map(n => `<button class="rate-btn" onclick="rate(this)">${n}</button>`).join('')}
+        </div>
       </div>
-    </div>
-  `;
-});
+    `;
+  });
+}
 
 function toggleAnswer(id) {
   const el = document.getElementById(id);
@@ -818,12 +1221,13 @@ function rate(btn) {
   btn.classList.add('selected');
 }
 
-// Checklist progress
+// ============ CHECKLIST ============
 function updateProgress() {
   const total = 15;
   const checked = document.querySelectorAll('#checklist-items input:checked').length;
   document.getElementById('progress-fill').style.width = `${(checked/total)*100}%`;
-  document.getElementById('progress-text').textContent = `${checked} / ${total} completed`;
+  const t = translations[currentLang];
+  document.getElementById('progress-text').textContent = t.check_progress.replace('{0}', checked).replace('{1}', total);
 
   document.querySelectorAll('.checklist-item').forEach(item => {
     item.classList.toggle('done', item.querySelector('input').checked);
@@ -834,16 +1238,17 @@ function updateProgress() {
   ));
 }
 
-// Timer
+// ============ TIMER ============
 let timerInterval = null;
 let timerSeconds = 0;
 let timerRunning = false;
 
 function toggleTimer() {
   const btn = document.getElementById('timer-start');
+  const t = translations[currentLang];
   if (timerRunning) {
     clearInterval(timerInterval);
-    btn.textContent = 'Resume';
+    btn.textContent = t.timer_resume;
     btn.className = 'timer-btn timer-start';
     timerRunning = false;
   } else {
@@ -854,11 +1259,12 @@ function toggleTimer() {
       document.getElementById('timer-display').textContent = `${m}:${s.toString().padStart(2,'0')}`;
 
       const hint = document.getElementById('timer-hint');
-      if (timerSeconds < 60) hint.textContent = 'Keep going...';
-      else if (timerSeconds <= 120) { hint.textContent = 'Sweet spot! Good length.'; hint.style.color = 'var(--success)'; }
-      else { hint.textContent = 'Getting long — try to wrap up.'; hint.style.color = 'var(--accent)'; }
+      const t2 = translations[currentLang];
+      if (timerSeconds < 60) { hint.textContent = t2.timer_keep; hint.style.color = ''; }
+      else if (timerSeconds <= 120) { hint.textContent = t2.timer_good; hint.style.color = 'var(--success)'; }
+      else { hint.textContent = t2.timer_long; hint.style.color = 'var(--accent)'; }
     }, 1000);
-    btn.textContent = 'Pause';
+    btn.textContent = t.timer_pause;
     btn.className = 'timer-btn timer-pause';
     timerRunning = true;
   }
@@ -868,14 +1274,15 @@ function resetTimer() {
   clearInterval(timerInterval);
   timerSeconds = 0;
   timerRunning = false;
+  const t = translations[currentLang];
   document.getElementById('timer-display').textContent = '0:00';
-  document.getElementById('timer-start').textContent = 'Start';
+  document.getElementById('timer-start').textContent = t.timer_start;
   document.getElementById('timer-start').className = 'timer-btn timer-start';
-  document.getElementById('timer-hint').textContent = 'Sweet spot: 1:00 - 2:00';
+  document.getElementById('timer-hint').textContent = t.timer_sweet;
   document.getElementById('timer-hint').style.color = '';
 }
 
-// Notes with localStorage
+// ============ NOTES ============
 const notesArea = document.getElementById('notes-area');
 const savedNotes = localStorage.getItem('rafael-notes');
 if (savedNotes) notesArea.value = savedNotes;
@@ -891,14 +1298,13 @@ notesArea.addEventListener('input', () => {
   }, 500);
 });
 
-// Load checklist state
+// ============ LOAD SAVED STATE ============
 const savedChecklist = localStorage.getItem('rafael-checklist');
 if (savedChecklist) {
   const states = JSON.parse(savedChecklist);
   document.querySelectorAll('#checklist-items input').forEach((cb, i) => {
     if (states[i]) cb.checked = true;
   });
-  updateProgress();
 }
 
 // Keyboard navigation for flashcards
@@ -909,6 +1315,9 @@ document.addEventListener('keydown', (e) => {
     if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flipCard(); }
   }
 });
+
+// ============ INIT ============
+setLang(currentLang);
 </script>
 
 </body>
