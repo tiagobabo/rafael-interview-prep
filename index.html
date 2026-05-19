@@ -469,6 +469,7 @@
     <button class="tab" data-tab="checklist" data-i18n="tab_checklist">Checklist</button>
     <button class="tab" data-tab="practice" data-i18n="tab_practice">Practice Timer</button>
     <button class="tab" data-tab="notes" data-i18n="tab_notes">My Notes</button>
+    <button class="tab" data-tab="interviewer" data-i18n="tab_interviewer">Interviewer Tips</button>
   </div>
 
   <!-- STRENGTHS SECTION -->
@@ -759,6 +760,42 @@
     </div>
   </div>
 
+  <!-- INTERVIEWER TIPS -->
+  <div class="section" id="interviewer">
+    <div class="card">
+      <h3 data-i18n="int_title">From Your Interviewer: How to Prepare</h3>
+      <p style="font-size:0.88rem; color:var(--text-light); margin-bottom:1rem;" data-i18n="int_source">This is a translated article written by Sofia Fernandes from Michael Page, the recruitment agency handling this role. Understanding her perspective gives you a direct advantage.</p>
+    </div>
+
+    <div class="card">
+      <h3 data-i18n="int_h1">Research the Company</h3>
+      <p data-i18n="int_p1">The first step is to <strong>review the job posting</strong> &mdash; it's important to know exactly which position you applied for, what the responsibilities are, and which requirements the company considers relevant. This way, you know what will be valued in candidates and can prepare accordingly.</p>
+      <p style="margin-top:0.6rem;" data-i18n="int_p2">Beyond knowing exactly what you applied for, it's also important to <strong>understand the company and its history</strong>. In the age of globalisation, there is no excuse for not doing this research. Navigate the company's social media and visit the corporate website. At some point, they will ask you why you are the right person for the role, and it's important to respond assertively and in a structured manner.</p>
+      <div class="highlight" data-i18n="int_tip1"><strong>For you, Rafael:</strong> You've already done this &mdash; check the "Company Info" tab. Make sure you can name their products, their telematics system (TrailerConnect), and their position as Europe's leading semi-trailer manufacturer.</div>
+    </div>
+
+    <div class="card">
+      <h3 data-i18n="int_h2">Prevent Setbacks</h3>
+      <p data-i18n="int_p3">The day before the interview, <strong>research the address and determine the easiest way to get there</strong>, and any potential obstacles you might face. Try to arrive ten minutes early. If you are late, explain it but don't spend the entire interview apologising.</p>
+      <p style="margin-top:0.6rem;" data-i18n="int_p4">Prepare your outfit: dress well, discreetly and soberly, but not excessively formal. Avoid strong perfumes or bold clothing.</p>
+      <p style="margin-top:0.6rem;" data-i18n="int_p5">It's also advisable to prepare some questions. If you are very nervous, you can mention this to the interviewer. This introduction can help break the ice and allow the conversation to be more informal.</p>
+      <div class="highlight" data-i18n="int_tip2"><strong>For you, Rafael:</strong> Since this is likely a video call, test your setup the day before &mdash; webcam, microphone, lighting, background. Dress smart-casual from at least the waist up. Have your questions ready (see the "My Notes" tab).</div>
+    </div>
+
+    <div class="card">
+      <h3 data-i18n="int_h3">Prepare Your Presentation</h3>
+      <p data-i18n="int_p6">Remember that you are <strong>not expected to recite your CV</strong> &mdash; the interviewer already knows your background. You should describe in a structured way the most relevant moments of your professional life, from academic training to professional experience, highlighting the most rewarding moments, the greatest challenges, what you learned from each experience, and what drove you to progress in each role, always justifying your choices.</p>
+      <p style="margin-top:0.6rem;" data-i18n="int_p7">The most common questions are: Why did you apply for this position? Why do you think you are the right person? What makes you want to work for this company? Are you in other recruitment processes? What are your short and medium-term plans? <strong>Always respond openly and honestly.</strong> By being sincere, responses are more spontaneous, and you will feel more relaxed and create empathy with your interviewer more easily.</p>
+      <p style="margin-top:0.6rem;" data-i18n="int_p8">Remember that the <strong>objective of the interview is to convey that you will be an asset to the company and why</strong>: everything comes down to this question. You will need to convince the interviewer that you are the right candidate, demonstrate that your profile fits the company's structure, and your skills meet what they are looking for.</p>
+      <div class="highlight" data-i18n="int_tip3"><strong>For you, Rafael:</strong> Don't just list your jobs. Tell the story: why pharmacy interested you, what you learned about precision and customer care, how teaching showed you patience, and why you're now choosing to commit fully to a professional career. The "why" behind each step matters more than the "what."</div>
+    </div>
+
+    <div class="card" style="border: 2px solid var(--accent);">
+      <h3 data-i18n="int_key_title">Key Takeaway from Sofia's Article</h3>
+      <div class="highlight" data-i18n="int_key_msg"><strong>Honesty wins.</strong> She explicitly says: a less sincere answer might pass the interview, but if you don't have the necessary skills or don't fit the company culture, it will be very difficult to stay at the company. Be genuine &mdash; your real experience and enthusiasm are your best tools.</div>
+    </div>
+  </div>
+
 </div>
 
 <footer>
@@ -912,6 +949,26 @@ const translations = {
     q_7: '"What does career growth look like from this role?"',
     q_8: '"Is there an opportunity to develop my German within the role?"',
     footer: "Built for Rafael \u2022 Good luck with the interview!",
+    // Interviewer tips
+    tab_interviewer: "Interviewer Tips",
+    int_title: "From Your Interviewer: How to Prepare",
+    int_source: "This is a translated article written by Sofia Fernandes from Michael Page, the recruitment agency handling this role. Understanding her perspective gives you a direct advantage.",
+    int_h1: "Research the Company",
+    int_p1: 'The first step is to <strong>review the job posting</strong> \u2014 it\'s important to know exactly which position you applied for, what the responsibilities are, and which requirements the company considers relevant. This way, you know what will be valued in candidates and can prepare accordingly.',
+    int_p2: 'Beyond knowing exactly what you applied for, it\'s also important to <strong>understand the company and its history</strong>. In the age of globalisation, there is no excuse for not doing this research. Navigate the company\'s social media and visit the corporate website. At some point, they will ask you why you are the right person for the role, and it\'s important to respond assertively and in a structured manner.',
+    int_tip1: '<strong>For you, Rafael:</strong> You\'ve already done this \u2014 check the "Company Info" tab. Make sure you can name their products, their telematics system (TrailerConnect), and their position as Europe\'s leading semi-trailer manufacturer.',
+    int_h2: "Prevent Setbacks",
+    int_p3: 'The day before the interview, <strong>research the address and determine the easiest way to get there</strong>, and any potential obstacles you might face. Try to arrive ten minutes early. If you are late, explain it but don\'t spend the entire interview apologising.',
+    int_p4: "Prepare your outfit: dress well, discreetly and soberly, but not excessively formal. Avoid strong perfumes or bold clothing.",
+    int_p5: "It's also advisable to prepare some questions. If you are very nervous, you can mention this to the interviewer. This introduction can help break the ice and allow the conversation to be more informal.",
+    int_tip2: '<strong>For you, Rafael:</strong> Since this is likely a video call, test your setup the day before \u2014 webcam, microphone, lighting, background. Dress smart-casual from at least the waist up. Have your questions ready (see the "My Notes" tab).',
+    int_h3: "Prepare Your Presentation",
+    int_p6: 'Remember that you are <strong>not expected to recite your CV</strong> \u2014 the interviewer already knows your background. You should describe in a structured way the most relevant moments of your professional life, from academic training to professional experience, highlighting the most rewarding moments, the greatest challenges, what you learned from each experience, and what drove you to progress in each role, always justifying your choices.',
+    int_p7: 'The most common questions are: Why did you apply for this position? Why do you think you are the right person? What makes you want to work for this company? Are you in other recruitment processes? What are your short and medium-term plans? <strong>Always respond openly and honestly.</strong> By being sincere, responses are more spontaneous, and you will feel more relaxed and create empathy with your interviewer more easily.',
+    int_p8: 'Remember that the <strong>objective of the interview is to convey that you will be an asset to the company and why</strong>: everything comes down to this question. You will need to convince the interviewer that you are the right candidate, demonstrate that your profile fits the company\'s structure, and your skills meet what they are looking for.',
+    int_tip3: '<strong>For you, Rafael:</strong> Don\'t just list your jobs. Tell the story: why pharmacy interested you, what you learned about precision and customer care, how teaching showed you patience, and why you\'re now choosing to commit fully to a professional career. The "why" behind each step matters more than the "what."',
+    int_key_title: "Key Takeaway from Sofia's Article",
+    int_key_msg: '<strong>Honesty wins.</strong> She explicitly says: a less sincere answer might pass the interview, but if you don\'t have the necessary skills or don\'t fit the company culture, it will be very difficult to stay at the company. Be genuine \u2014 your real experience and enthusiasm are your best tools.',
     // Flashcard data
     flashcards: [
       { q: "When was Schmitz Cargobull founded?", a: "<strong>1892</strong> \u2014 over 130 years ago. Founded in Altenberge, Germany. Now headquartered in Horstmar, North Rhine-Westphalia." },
@@ -1082,6 +1139,26 @@ const translations = {
     q_7: '\u201ECum arată dezvoltarea carierei din acest rol?\u201D',
     q_8: '\u201EExistă oportunitatea de a-mi dezvolta germana în cadrul rolului?\u201D',
     footer: "Creat pentru Rafael \u2022 Succes la interviu!",
+    // Interviewer tips
+    tab_interviewer: "Sfaturi de la Intervievator",
+    int_title: "De la Intervievatorul T\u0103u: Cum S\u0103 Te Preg\u0103te\u0219ti",
+    int_source: "Acesta este un articol tradus scris de Sofia Fernandes de la Michael Page, agen\u021Bia de recrutare care gestioneaz\u0103 acest rol. \u00CEN\u021Belegerea perspectivei ei \u00EE\u021Bi d\u0103 un avantaj direct.",
+    int_h1: "Cerceteaz\u0103 Compania",
+    int_p1: 'Primul pas este s\u0103 <strong>revizuie\u0219ti anun\u021Bul de angajare</strong> \u2014 este important s\u0103 \u0219tii exact pentru ce pozi\u021Bie ai aplicat, care sunt responsabilit\u0103\u021Bile \u0219i ce cerin\u021Be consider\u0103 compania relevante. Astfel, \u0219tii ce va fi apreciat la candida\u021Bi \u0219i te po\u021Bi preg\u0103ti corespunz\u0103tor.',
+    int_p2: 'Pe l\u00E2ng\u0103 faptul c\u0103 \u0219tii exact pentru ce ai aplicat, este important s\u0103 <strong>\u00EEn\u021Belegi compania \u0219i istoria ei</strong>. \u00CEn era globaliz\u0103rii, nu exist\u0103 nicio scuz\u0103 s\u0103 nu faci aceast\u0103 cercetare. Navigheaz\u0103 pe re\u021Belele sociale ale companiei \u0219i viziteaz\u0103 site-ul corporativ. La un moment dat, te vor \u00EEntreba de ce e\u0219ti persoana potrivit\u0103 pentru rol, \u0219i este important s\u0103 r\u0103spunzi asertiv \u0219i structurat.',
+    int_tip1: '<strong>Pentru tine, Rafael:</strong> Ai f\u0103cut deja asta \u2014 verific\u0103 tab-ul \\u201EAbout Company\\u201D. Asigur\u0103-te c\u0103 po\u021Bi numi produsele lor, sistemul telematic (TrailerConnect) \u0219i pozi\u021Bia lor de lider european \u00EEn produc\u021Bia de semiremorci.',
+    int_h2: "Previne Problemele",
+    int_p3: 'Cu o zi \u00EEnainte de interviu, <strong>cerceteaz\u0103 adresa \u0219i determin\u0103 cel mai u\u0219or mod de a ajunge acolo</strong>, precum \u0219i eventualele obstacole. \u00CEncearc\u0103 s\u0103 ajungi cu zece minute mai devreme. Dac\u0103 \u00EEnt\u00E2rzii, explic\u0103, dar nu petrece tot interviul cerându-\u021Bi scuze.',
+    int_p4: "Preg\u0103te\u0219te-\u021Bi \u021Binuta: \u00EEmbrac\u0103-te bine, discret \u0219i sobru, dar nu excesiv de formal. Evit\u0103 parfumurile puternice sau \u021Binutele \u00EEndr\u0103zne\u021Be.",
+    int_p5: "Este de asemenea recomandabil s\u0103 preg\u0103te\u0219ti c\u00E2teva \u00EEntreb\u0103ri. Dac\u0103 e\u0219ti foarte nervos, po\u021Bi men\u021Biona acest lucru intervievatorului. Aceast\u0103 introducere poate ajuta la spargerea ghe\u021Bii \u0219i permite conversa\u021Biei s\u0103 fie mai informal\u0103.",
+    int_tip2: '<strong>Pentru tine, Rafael:</strong> Deoarece acesta va fi probabil un apel video, testeaz\u0103-\u021Bi setup-ul cu o zi \u00EEnainte \u2014 camera web, microfonul, iluminarea, fundalul. \u00CEmbrac\u0103-te smart-casual cel pu\u021Bin de la brâu \u00EEn sus. Ai \u00EEntreb\u0103rile preg\u0103tite (vezi tab-ul \\u201ENoti\u021Bele Mele\\u201D).',
+    int_h3: "Preg\u0103te\u0219te-\u021Bi Prezentarea",
+    int_p6: 'Aminte\u0219te-\u021Bi c\u0103 <strong>nu se a\u0219teapt\u0103 s\u0103 recitezi CV-ul</strong> \u2014 intervievatorul \u00EE\u021Bi cunoa\u0219te deja parcursul. Ar trebui s\u0103 descrii \u00EEntr-un mod structurat cele mai relevante momente din via\u021Ba ta profesional\u0103, de la preg\u0103tirea academic\u0103 la experien\u021Ba profesional\u0103, subliniind cele mai \u00EEmplinitoare momente, cele mai mari provoc\u0103ri, ce ai \u00EEnv\u0103\u021Bat din fiecare experien\u021B\u0103 \u0219i ce te-a determinat s\u0103 progresezi \u00EEn fiecare rol, justific\u00E2ndu-\u021Bi \u00EEntotdeauna alegerile.',
+    int_p7: 'Cele mai comune \u00EEntreb\u0103ri sunt: De ce ai aplicat pentru aceast\u0103 pozi\u021Bie? De ce crezi c\u0103 e\u0219ti persoana potrivit\u0103? Ce te face s\u0103 vrei s\u0103 lucrezi pentru aceast\u0103 companie? E\u0219ti \u00EEn alte procese de recrutare? Care sunt planurile tale pe termen scurt \u0219i mediu? <strong>R\u0103spunde \u00EEntotdeauna deschis \u0219i sincer.</strong> Fiind sincer, r\u0103spunsurile sunt mai spontane, te vei sim\u021Bi mai relaxat \u0219i vei crea empatie cu intervievatorul mai u\u0219or.',
+    int_p8: 'Aminte\u0219te-\u021Bi c\u0103 <strong>obiectivul interviului este s\u0103 transmi\u021Bi c\u0103 vei fi un atu pentru companie \u0219i de ce</strong>: totul se reduce la aceast\u0103 \u00EEntrebare. Va trebui s\u0103 convingi intervievatorul c\u0103 e\u0219ti candidatul potrivit, s\u0103 demonstrezi c\u0103 profilul t\u0103u se potrive\u0219te structurii companiei \u0219i abilit\u0103\u021Bile tale corespund cu ceea ce caut\u0103.',
+    int_tip3: '<strong>Pentru tine, Rafael:</strong> Nu \u00EE\u021Bi enumera doar joburile. Spune povestea: de ce te-a interesat farmacia, ce ai \u00EEnv\u0103\u021Bat despre precizie \u0219i grija fa\u021B\u0103 de clien\u021Bi, cum \u021Bi-a ar\u0103tat predarea r\u0103bdarea, \u0219i de ce alegi acum s\u0103 te dedici complet unei cariere profesionale. \\u201EDe ce\\u201D din spatele fiec\u0103rui pas conteaz\u0103 mai mult dec\u00E2t \\u201ECe\\u201D.',
+    int_key_title: "Concluzia Cheie din Articolul Sofiei",
+    int_key_msg: '<strong>Sinceritatea câ\u0219tig\u0103.</strong> Ea spune explicit: un r\u0103spuns mai pu\u021Bin sincer ar putea trece de interviu, dar dac\u0103 nu ai abilit\u0103\u021Bile necesare sau nu te potrive\u0219ti culturii companiei, va fi foarte dificil s\u0103 r\u0103mâi \u00EEn companie. Fii autentic \u2014 experien\u021Ba ta real\u0103 \u0219i entuziasmul sunt cele mai bune instrumente ale tale.',
     // Flashcard data
     flashcards: [
       { q: "Când a fost fondată Schmitz Cargobull?", a: "<strong>1892</strong> \u2014 acum peste 130 de ani. Fondată în Altenberge, Germania. Acum cu sediul în Horstmar, Renania de Nord-Westfalia." },
