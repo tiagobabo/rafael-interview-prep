@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interview Prep - Schmitz Cargobull</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --accent: #e8792f;
+    --accent-light: #f4a261;
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --text: #2c3e50;
+    --text-light: #6b7c93;
+    --success: #27ae60;
+    --border: #e1e8ef;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, #2c5f8a 100%);
+    color: white;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light), var(--accent));
+  }
+
+  header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.3rem; }
+  header p { opacity: 0.85; font-size: 0.95rem; }
+  header .subtitle { font-size: 1.1rem; opacity: 0.95; margin-bottom: 0.2rem; }
+
+  .container { max-width: 800px; margin: 0 auto; padding: 1.5rem; }
+
+  /* Navigation tabs */
+  .tabs {
+    display: flex;
+    gap: 0.4rem;
+    overflow-x: auto;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tab {
+    padding: 0.6rem 1rem;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: var(--card);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.2s;
+    color: var(--text-light);
+  }
+
+  .tab:hover { border-color: var(--accent); color: var(--accent); }
+  .tab.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+
+  .card h3 {
+    color: var(--primary);
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; font-size: 0.95rem; }
+
+  .highlight {
+    background: linear-gradient(120deg, #fff3e0 0%, #ffe0b2 100%);
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    border-radius: 0 8px 8px 0;
+    margin: 0.8rem 0;
+    font-size: 0.95rem;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin: 0.2rem;
+  }
+
+  .tag-green { background: #e8f5e9; color: #2e7d32; }
+  .tag-blue { background: #e3f2fd; color: #1565c0; }
+  .tag-orange { background: #fff3e0; color: #e65100; }
+
+  /* Flashcards */
+  .flashcard-container { perspective: 1000px; margin: 1rem 0; }
+
+  .flashcard {
+    width: 100%;
+    min-height: 200px;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+  }
+
+  .flashcard.flipped { transform: rotateY(180deg); }
+
+  .flashcard-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .flashcard-front {
+    background: linear-gradient(135deg, var(--primary), #2c5f8a);
+    color: white;
+  }
+
+  .flashcard-front h3 { color: white; font-size: 1.15rem; margin-bottom: 0.5rem; }
+  .flashcard-front .hint { opacity: 0.7; font-size: 0.8rem; margin-top: 1rem; }
+
+  .flashcard-back {
+    background: var(--card);
+    border: 2px solid var(--accent);
+    transform: rotateY(180deg);
+    text-align: left;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    overflow-y: auto;
+  }
+
+  .flashcard-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .flashcard-nav button {
+    padding: 0.5rem 1.2rem;
+    border: 2px solid var(--primary);
+    background: white;
+    color: var(--primary);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .flashcard-nav button:hover {
+    background: var(--primary);
+    color: white;
+  }
+
+  .flashcard-counter { font-weight: 600; color: var(--text-light); min-width: 60px; text-align: center; }
+
+  /* Mock interview */
+  .question-block { margin-bottom: 1.5rem; }
+  .question-block h4 { color: var(--primary); margin-bottom: 0.5rem; }
+
+  .answer-toggle {
+    padding: 0.5rem 1rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    margin-top: 0.3rem;
+  }
+
+  .answer-toggle:hover { background: #d06a25; }
+
+  .sample-answer {
+    display: none;
+    margin-top: 0.8rem;
+    padding: 1rem;
+    background: #f0faf0;
+    border-radius: 8px;
+    border-left: 3px solid var(--success);
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  .sample-answer.visible { display: block; }
+
+  .self-rate {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+    align-items: center;
+  }
+
+  .self-rate span { font-size: 0.82rem; color: var(--text-light); }
+
+  .rate-btn {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: white;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 700;
+    transition: all 0.2s;
+    color: var(--text-light);
+  }
+
+  .rate-btn:hover, .rate-btn.selected {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: white;
+  }
+
+  /* Checklist */
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .checklist-item:last-child { border-bottom: none; }
+
+  .checklist-item input[type="checkbox"] {
+    width: 20px; height: 20px;
+    margin-top: 2px;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .checklist-item label { cursor: pointer; font-size: 0.95rem; }
+  .checklist-item.done label { text-decoration: line-through; color: var(--text-light); }
+
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    margin: 1rem 0;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+
+  .progress-text { font-size: 0.82rem; color: var(--text-light); text-align: right; }
+
+  /* Notes */
+  .notes-area {
+    width: 100%;
+    min-height: 150px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: vertical;
+    transition: border-color 0.2s;
+  }
+
+  .notes-area:focus { outline: none; border-color: var(--accent); }
+
+  .save-indicator {
+    font-size: 0.8rem;
+    color: var(--success);
+    margin-top: 0.3rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .save-indicator.show { opacity: 1; }
+
+  /* Product cards */
+  .product-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+
+  .product-card {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.2s;
+  }
+
+  .product-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .product-card h4 { color: var(--primary); margin-bottom: 0.3rem; }
+  .product-card .product-german { font-size: 0.82rem; color: var(--text-light); margin-bottom: 0.5rem; }
+  .product-card p { font-size: 0.9rem; }
+
+  /* Timer */
+  .timer-widget {
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .timer-display {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary);
+    font-variant-numeric: tabular-nums;
+    margin: 0.5rem 0;
+  }
+
+  .timer-buttons { display: flex; gap: 0.5rem; justify-content: center; margin-top: 0.5rem; }
+
+  .timer-btn {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+
+  .timer-start { background: var(--success); color: white; }
+  .timer-start:hover { background: #219a52; }
+  .timer-pause { background: var(--accent); color: white; }
+  .timer-pause:hover { background: #d06a25; }
+  .timer-reset { background: var(--border); color: var(--text); }
+  .timer-reset:hover { background: #cfd8e3; }
+
+  /* Strengths section */
+  .strength-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+
+  .strength-item:last-child { border-bottom: none; }
+
+  .strength-icon {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .strength-icon.lang { background: #e3f2fd; }
+  .strength-icon.exp { background: #e8f5e9; }
+  .strength-icon.soft { background: #fff3e0; }
+
+  .strength-details h4 { font-size: 0.95rem; margin-bottom: 0.2rem; }
+  .strength-details p { font-size: 0.88rem; color: var(--text-light); }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-light);
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.4rem; }
+    .container { padding: 1rem; }
+    .card { padding: 1.2rem; }
+    .flashcard-face { padding: 1.5rem; }
+    .timer-display { font-size: 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="subtitle">Interview Preparation</p>
+  <h1>Schmitz Cargobull - Customer Support</h1>
+  <p>Romanian-speaking representative &bull; Remote role</p>
+</header>
+
+<div class="container">
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-tab="strengths">Your Strengths</button>
+    <button class="tab" data-tab="company">Company Info</button>
+    <button class="tab" data-tab="flashcards">Flashcards</button>
+    <button class="tab" data-tab="mock">Mock Interview</button>
+    <button class="tab" data-tab="checklist">Checklist</button>
+    <button class="tab" data-tab="practice">Practice Timer</button>
+    <button class="tab" data-tab="notes">My Notes</button>
+  </div>
+
+  <!-- STRENGTHS SECTION -->
+  <div class="section active" id="strengths">
+    <div class="card">
+      <h3>Why You're a Great Fit, Rafael</h3>
+      <p style="font-size:0.92rem; color:var(--text-light); margin-bottom:1rem;">Here's how your background maps to what they're looking for:</p>
+
+      <div class="strength-item">
+        <div class="strength-icon lang">R</div>
+        <div class="strength-details">
+          <h4>Romanian (C1-C2) &mdash; Core Requirement Met</h4>
+          <p>They need native or near-native Romanian. You have it. This is your #1 differentiator vs other candidates.</p>
+        </div>
+      </div>
+
+      <div class="strength-item">
+        <div class="strength-icon lang">E</div>
+        <div class="strength-details">
+          <h4>English (C1-C2) &mdash; Strong</h4>
+          <p>Good command of spoken and written English &mdash; check. You studied in the UK, which proves real fluency.</p>
+        </div>
+      </div>
+
+      <div class="strength-item">
+        <div class="strength-icon lang">D</div>
+        <div class="strength-details">
+          <h4>German (A2-B1) &mdash; Bonus Language</h4>
+          <p>Schmitz Cargobull is a <strong>German company</strong>. Even intermediate German shows cultural alignment. Mention willingness to improve it!</p>
+        </div>
+      </div>
+
+      <div class="strength-item">
+        <div class="strength-icon exp">Rx</div>
+        <div class="strength-details">
+          <h4>Pharmacy Experience &mdash; Your Best Story</h4>
+          <p>Served customers, handled queries, processed prescriptions accurately, verified deliveries. This is the closest thing to phone support + data entry. Lead with this.</p>
+        </div>
+      </div>
+
+      <div class="strength-item">
+        <div class="strength-icon exp">CS</div>
+        <div class="strength-details">
+          <h4>Charity Shop &mdash; Customer-Facing Retail</h4>
+          <p>Answering queries, assisting with purchases, maintaining standards. Shows friendly service orientation.</p>
+        </div>
+      </div>
+
+      <div class="strength-item">
+        <div class="strength-icon soft">TA</div>
+        <div class="strength-details">
+          <h4>Teaching Assistant &mdash; Communication & Patience</h4>
+          <p>One-to-one support, adapting to different learners. Perfect example for "how do you handle someone who doesn't understand?"</p>
+        </div>
+      </div>
+
+      <div class="strength-item">
+        <div class="strength-icon soft">BHF</div>
+        <div class="strength-details">
+          <h4>54-Mile Charity Ride &mdash; Commitment & Drive</h4>
+          <p>Shows discipline, goal-setting, and community spirit. Aligns with their "human-centered company culture" value.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <strong>Key message to convey:</strong> "I bring the exact language skills you need, real customer-facing experience across three different settings, and I'm relocating because I'm genuinely committed to this opportunity."
+    </div>
+
+    <div class="card">
+      <h3>Address the Elephant in the Room</h3>
+      <p style="margin-bottom:0.8rem;">They will ask about uni. Be ready:</p>
+      <div class="highlight">
+        "I've decided to pause my studies to fully commit to a professional opportunity. I want to build real-world experience in a company where I can grow long-term. Schmitz Cargobull's emphasis on continuous training and internal career development is exactly what I'm looking for at this stage."
+      </div>
+      <p style="font-size:0.88rem; color:var(--text-light); margin-top:0.5rem;">Frame it as a deliberate career move, not "dropping out." You're <em>choosing</em> professional growth.</p>
+    </div>
+  </div>
+
+  <!-- COMPANY INFO -->
+  <div class="section" id="company">
+    <div class="card">
+      <h3>About Schmitz Cargobull</h3>
+      <ul>
+        <li><strong>Founded:</strong> 1892 in Altenberge, Germany</li>
+        <li><strong>HQ:</strong> Horstmar, North Rhine-Westphalia, Germany</li>
+        <li><strong>Industry:</strong> Trailer &amp; semi-trailer manufacturing</li>
+        <li><strong>Position:</strong> Europe's leading semi-trailer manufacturer</li>
+        <li><strong>Employees:</strong> ~6,500+</li>
+        <li><strong>Production:</strong> ~60,000 vehicles/year</li>
+        <li><strong>Customers:</strong> Fleet operators, logistics companies, freight carriers, haulage firms</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Key Products &mdash; Know These!</h3>
+      <div class="product-grid">
+        <div class="product-card">
+          <h4>Refrigerated Trailers (Reefers)</h4>
+          <div class="product-german">German: K&uuml;hlauflieger</div>
+          <p>Temperature-controlled trailers for transporting perishable goods (food, pharmaceuticals). Schmitz Cargobull's FERROPLAST technology is well-known. This is their flagship product line.</p>
+        </div>
+        <div class="product-card">
+          <h4>Curtain-sided Trailers (Tautliners)</h4>
+          <div class="product-german">German: Schiebeplanenauflieger</div>
+          <p>Flexible trailers with sliding curtain sides for easy side-loading. Popular for general cargo, palletised goods. Very common in European logistics.</p>
+        </div>
+        <div class="product-card">
+          <h4>Box Trailers (Dry Freight)</h4>
+          <div class="product-german">German: Kofferauflieger</div>
+          <p>Enclosed rigid-sided trailers for dry goods, furniture, electronics &mdash; anything that needs protection from weather but not temperature control.</p>
+        </div>
+        <div class="product-card">
+          <h4>Container Chassis</h4>
+          <div class="product-german">German: Containerchassis</div>
+          <p>Frames designed to carry shipping containers. Used in intermodal transport (ship-to-rail-to-road).</p>
+        </div>
+        <div class="product-card">
+          <h4>Tipper Trailers</h4>
+          <div class="product-german">German: Kipperauflieger</div>
+          <p>For bulk materials like grain, aggregates, and construction materials. Can tip to unload cargo.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Digital &amp; Telematics</h3>
+      <p>Schmitz Cargobull also offers <strong>TrailerConnect</strong> &mdash; a telematics system that lets fleet managers track trailer location, temperature, door status, and more in real-time. Mentioning you know about this shows initiative.</p>
+    </div>
+
+    <div class="card">
+      <h3>Company Values to Reference</h3>
+      <ul>
+        <li><strong>Quality &amp; reliability</strong> &mdash; 130+ years of engineering excellence</li>
+        <li><strong>Innovation</strong> &mdash; telematics, lightweight construction, sustainability efforts</li>
+        <li><strong>Customer focus</strong> &mdash; strong after-sales and service network across Europe</li>
+        <li><strong>Sustainability</strong> &mdash; working on reducing transport emissions</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FLASHCARDS -->
+  <div class="section" id="flashcards">
+    <div class="card">
+      <h3>Study Flashcards</h3>
+      <p style="font-size:0.9rem; color:var(--text-light);">Click to flip. Use arrows to navigate.</p>
+
+      <div class="flashcard-container">
+        <div class="flashcard" id="flashcard" onclick="flipCard()">
+          <div class="flashcard-face flashcard-front">
+            <h3 id="fc-question"></h3>
+            <div class="hint">Click to reveal answer</div>
+          </div>
+          <div class="flashcard-face flashcard-back">
+            <div id="fc-answer"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flashcard-nav">
+        <button onclick="prevCard()">&larr; Prev</button>
+        <span class="flashcard-counter" id="fc-counter"></span>
+        <button onclick="nextCard()">Next &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOCK INTERVIEW -->
+  <div class="section" id="mock">
+    <div class="card">
+      <h3>Mock Interview Questions</h3>
+      <p style="font-size:0.9rem; color:var(--text-light); margin-bottom:1.5rem;">Practice answering out loud, then check the suggested answer. Rate your confidence.</p>
+
+      <div id="mock-questions"></div>
+    </div>
+
+    <div class="card">
+      <h3>Scenario-Based Questions</h3>
+
+      <div class="question-block">
+        <h4>Scenario 1: Angry customer about delayed delivery</h4>
+        <p style="font-size:0.9rem; margin-bottom:0.5rem;">"A Romanian-speaking customer calls, very frustrated, saying their trailer was supposed to arrive last week and it hasn't. You don't have access to delivery tracking. What do you do?"</p>
+        <button class="answer-toggle" onclick="toggleAnswer('s1')">Show Suggested Approach</button>
+        <div class="sample-answer" id="s1">
+          <strong>1.</strong> Stay calm, listen actively, acknowledge their frustration: "I completely understand your concern, and I'm sorry for the inconvenience."<br><br>
+          <strong>2.</strong> Gather information: order number, name, delivery address, contact details.<br><br>
+          <strong>3.</strong> Be honest: "I want to make sure you get accurate information, so I'm going to escalate this to our logistics team who can check the exact status."<br><br>
+          <strong>4.</strong> Set expectations: "They will get back to you within [timeframe]. Can I confirm the best number to reach you on?"<br><br>
+          <strong>5.</strong> Log everything in the system for follow-up.<br><br>
+          <strong>Key:</strong> Never guess or make promises you can't keep. Empathy + accuracy + proper escalation.
+        </div>
+      </div>
+
+      <div class="question-block">
+        <h4>Scenario 2: Customer asks technical questions you can't answer</h4>
+        <p style="font-size:0.9rem; margin-bottom:0.5rem;">"A customer calls asking about the specific temperature range of the S.KO COOL refrigerated trailer and whether it's compatible with their fleet's tracking system."</p>
+        <button class="answer-toggle" onclick="toggleAnswer('s2')">Show Suggested Approach</button>
+        <div class="sample-answer" id="s2">
+          <strong>1.</strong> Thank them for the question and show interest.<br><br>
+          <strong>2.</strong> Share what you know at a basic level: "Our refrigerated trailers are designed for a wide range of temperature-controlled transport."<br><br>
+          <strong>3.</strong> For specifics: "For the exact technical specifications and compatibility, I'd like to connect you with our technical sales team who can give you the most accurate information."<br><br>
+          <strong>4.</strong> Offer to arrange a callback or transfer the call.<br><br>
+          <strong>Key:</strong> It's OK not to know everything &mdash; knowing when to escalate is a strength.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="section" id="checklist">
+    <div class="card">
+      <h3>Interview Preparation Checklist</h3>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      <div class="progress-text" id="progress-text">0 / 15 completed</div>
+
+      <div id="checklist-items">
+        <div class="checklist-item"><input type="checkbox" id="c1" onchange="updateProgress()"><label for="c1">Research Schmitz Cargobull's history and key facts</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c2" onchange="updateProgress()"><label for="c2">Learn the 5 main product types (reefer, curtain, box, container, tipper)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c3" onchange="updateProgress()"><label for="c3">Practice "Tell me about yourself" answer out loud (2 min max)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c4" onchange="updateProgress()"><label for="c4">Prepare your pharmacy experience story (STAR format)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c5" onchange="updateProgress()"><label for="c5">Prepare answer for "Why leave university?"</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c6" onchange="updateProgress()"><label for="c6">Practice a self-introduction in Romanian</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c7" onchange="updateProgress()"><label for="c7">Prepare 3-5 questions to ask the interviewer</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c8" onchange="updateProgress()"><label for="c8">Review all flashcards at least twice</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c9" onchange="updateProgress()"><label for="c9">Do a full mock interview with a friend (20 min)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c10" onchange="updateProgress()"><label for="c10">Test your microphone, webcam, and internet connection</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c11" onchange="updateProgress()"><label for="c11">Prepare a quiet, well-lit space for the interview</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c12" onchange="updateProgress()"><label for="c12">Have a copy of your CV ready to reference</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c13" onchange="updateProgress()"><label for="c13">Prepare a notepad and pen for notes during the interview</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c14" onchange="updateProgress()"><label for="c14">Pick out professional, smart-casual clothes</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c15" onchange="updateProgress()"><label for="c15">Get a good night's sleep before the interview</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRACTICE TIMER -->
+  <div class="section" id="practice">
+    <div class="card">
+      <h3>Practice Answer Timer</h3>
+      <p style="font-size:0.9rem; color:var(--text-light); margin-bottom:1rem;">Use this to time your answers. Aim for 1-2 minutes per question &mdash; concise but complete.</p>
+      <div class="timer-widget">
+        <div class="timer-display" id="timer-display">0:00</div>
+        <div style="font-size:0.82rem; color:var(--text-light); margin-bottom:0.5rem;" id="timer-hint">Sweet spot: 1:00 - 2:00</div>
+        <div class="timer-buttons">
+          <button class="timer-btn timer-start" id="timer-start" onclick="toggleTimer()">Start</button>
+          <button class="timer-btn timer-reset" onclick="resetTimer()">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Quick Practice Prompts</h3>
+      <p style="font-size:0.9rem; color:var(--text-light); margin-bottom:1rem;">Hit the timer, pick a prompt, and answer out loud:</p>
+      <div id="practice-prompts">
+        <div class="highlight" style="cursor:pointer; margin:0.5rem 0;" onclick="this.style.opacity = this.style.opacity === '0.5' ? '1' : '0.5'">Tell me about yourself and why you're interested in this role.</div>
+        <div class="highlight" style="cursor:pointer; margin:0.5rem 0;" onclick="this.style.opacity = this.style.opacity === '0.5' ? '1' : '0.5'">Describe a time you helped someone who was frustrated or confused.</div>
+        <div class="highlight" style="cursor:pointer; margin:0.5rem 0;" onclick="this.style.opacity = this.style.opacity === '0.5' ? '1' : '0.5'">How do you stay organized when working from home?</div>
+        <div class="highlight" style="cursor:pointer; margin:0.5rem 0;" onclick="this.style.opacity = this.style.opacity === '0.5' ? '1' : '0.5'">What do you know about Schmitz Cargobull?</div>
+        <div class="highlight" style="cursor:pointer; margin:0.5rem 0;" onclick="this.style.opacity = this.style.opacity === '0.5' ? '1' : '0.5'">Why are you leaving university to take this role?</div>
+        <div class="highlight" style="cursor:pointer; margin:0.5rem 0;" onclick="this.style.opacity = this.style.opacity === '0.5' ? '1' : '0.5'">A customer calls upset about a late delivery. Walk me through how you'd handle it.</div>
+      </div>
+      <p style="font-size:0.82rem; color:var(--text-light); margin-top:0.5rem;">Click a prompt to mark it as done.</p>
+    </div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="section" id="notes">
+    <div class="card">
+      <h3>My Notes</h3>
+      <p style="font-size:0.9rem; color:var(--text-light); margin-bottom:0.8rem;">Jot down your own talking points, stories, or things to remember. Saved automatically in your browser.</p>
+      <textarea class="notes-area" id="notes-area" placeholder="Write your notes here...&#10;&#10;Ideas:&#10;- Your 'tell me about yourself' script&#10;- Key stories to reference&#10;- Questions to ask them&#10;- Things to remember on the day"></textarea>
+      <div class="save-indicator" id="save-indicator">Saved!</div>
+    </div>
+
+    <div class="card">
+      <h3>Questions to Ask Them</h3>
+      <p style="font-size:0.9rem; color:var(--text-light); margin-bottom:0.8rem;">Pick 3-5 of these to ask at the end:</p>
+      <ul style="font-size:0.92rem;">
+        <li>"What does a typical day look like in this role?"</li>
+        <li>"What CRM or tools does the team use?"</li>
+        <li>"How is performance measured for this position?"</li>
+        <li>"What does the onboarding and training look like?"</li>
+        <li>"What are the working hours and shift expectations?"</li>
+        <li>"How large is the Romanian-speaking support team?"</li>
+        <li>"What does career growth look like from this role?"</li>
+        <li>"Is there an opportunity to develop my German within the role?"</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Built for Rafael &bull; Good luck with the interview!
+</footer>
+
+<script>
+// Tab navigation
+const tabs = document.querySelectorAll('.tab');
+const sections = document.querySelectorAll('.section');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+  });
+});
+
+// Flashcards
+const flashcards = [
+  { q: "When was Schmitz Cargobull founded?", a: "<strong>1892</strong> — over 130 years ago. Founded in Altenberge, Germany. Now headquartered in Horstmar, North Rhine-Westphalia." },
+  { q: "What are the 5 main product types?", a: "<strong>1.</strong> Refrigerated trailers (reefers)<br><strong>2.</strong> Curtain-sided trailers (tautliners)<br><strong>3.</strong> Box trailers (dry freight)<br><strong>4.</strong> Container chassis<br><strong>5.</strong> Tipper trailers" },
+  { q: "What is TrailerConnect?", a: "Schmitz Cargobull's <strong>telematics system</strong>. It lets fleet managers track trailer location, temperature, door status, and more in real-time. Shows the company's digital innovation." },
+  { q: "Who are Schmitz Cargobull's customers?", a: "<strong>Fleet operators, logistics companies, freight carriers, and haulage firms</strong> across Europe. Anyone who needs to transport goods by road." },
+  { q: "What's a reefer trailer used for?", a: "<strong>Temperature-controlled transport</strong> of perishable goods: food, dairy, meat, pharmaceuticals. Maintains specific temperatures during transit. Schmitz Cargobull's FERROPLAST tech is well-known." },
+  { q: "Why are you leaving university for this role?", a: "I've decided to <strong>pause my studies to commit fully</strong> to a professional opportunity. I want to build real-world experience in a company where I can grow long-term. Schmitz Cargobull's emphasis on continuous training and career development is exactly what I'm looking for." },
+  { q: "What's your biggest strength for this role?", a: "My <strong>trilingual ability</strong> (Romanian C1-C2, English C1-C2, German A2-B1) combined with hands-on customer service experience across pharmacy, retail, and education. I'm used to helping people and staying accurate under pressure." },
+  { q: "How do you handle a question you can't answer?", a: "<strong>1.</strong> Acknowledge the question<br><strong>2.</strong> Be honest: 'I want to give you accurate information'<br><strong>3.</strong> Take their details<br><strong>4.</strong> Escalate to the right team<br><strong>5.</strong> Set a callback expectation<br><strong>6.</strong> Log everything for follow-up" },
+  { q: "What does 'first-line customer support' mean?", a: "You're the <strong>first point of contact</strong> for customers. You handle initial queries, gather information, resolve simple issues, and escalate complex ones to specialised teams (sales, technical, after-sales)." },
+  { q: "How will you manage working fully remotely?", a: "<strong>Dedicated workspace</strong>, consistent routine, clear daily goals. I already manage independent study at university. I'm disciplined with time management and comfortable with digital communication tools." },
+  { q: "What languages do you speak?", a: "<strong>Romanian</strong> (C1-C2, fluent)<br><strong>English</strong> (C1-C2, fluent — studied in UK)<br><strong>German</strong> (A2-B1, intermediate — eager to improve)<br><br>The German is a bonus for a German-headquartered company!" },
+  { q: "Describe your pharmacy experience in one sentence.", a: "I served customers in a busy community pharmacy, <strong>handling queries, processing prescriptions accurately, and verifying stock deliveries</strong> — all in a fast-paced environment where precision mattered." },
+];
+
+let currentCard = 0;
+
+function renderCard() {
+  document.getElementById('fc-question').textContent = flashcards[currentCard].q;
+  document.getElementById('fc-answer').innerHTML = flashcards[currentCard].a;
+  document.getElementById('fc-counter').textContent = `${currentCard + 1} / ${flashcards.length}`;
+  document.getElementById('flashcard').classList.remove('flipped');
+}
+
+function flipCard() { document.getElementById('flashcard').classList.toggle('flipped'); }
+
+function nextCard() {
+  currentCard = (currentCard + 1) % flashcards.length;
+  renderCard();
+}
+
+function prevCard() {
+  currentCard = (currentCard - 1 + flashcards.length) % flashcards.length;
+  renderCard();
+}
+
+renderCard();
+
+// Mock interview questions
+const mockQuestions = [
+  { q: "Tell me about yourself.", a: "I'm Rafael, I'm originally from Romania and I've been living in the UK where I've built hands-on experience in customer service across pharmacy, retail, and education. I speak fluent Romanian and English, plus intermediate German. I'm now looking to relocate and commit fully to a professional role where I can grow. Schmitz Cargobull's focus on training and career development, plus the chance to use my language skills daily, makes this an exciting opportunity for me." },
+  { q: "Why do you want to work for Schmitz Cargobull?", a: "Schmitz Cargobull has over 130 years of history and is Europe's leading trailer manufacturer — that's a company with real stability and reputation. I'm drawn to the multicultural team, the remote flexibility, and especially the focus on professional development. The fact that it's a German company is a bonus for me since I'm also learning German and would love to develop that further." },
+  { q: "You don't have call center experience. Why should we hire you?", a: "While I haven't worked in a formal call center, every role I've had has been customer-facing. At the pharmacy, I served customers daily in a fast-paced setting — handling queries, processing prescriptions accurately, and staying calm under pressure. As a teaching assistant, I learned to communicate patiently and adapt to different people. I'm a fast learner and I'm confident these skills translate directly to phone support." },
+  { q: "How do you handle working independently from home?", a: "I'm already used to independent work from my university studies — managing deadlines, doing research, and staying disciplined without someone looking over my shoulder. For remote work specifically, I set up a dedicated workspace, keep a consistent routine, and I'm proactive about communicating with my team. I take reliability seriously." },
+  { q: "Tell me about a time you dealt with a difficult situation at work.", a: "At the pharmacy, I had a customer who was frustrated because their prescription wasn't ready yet. I stayed calm, acknowledged their frustration, checked the status with the dispenser, and explained the situation clearly. I offered to call them as soon as it was ready. They left much calmer. I learned that listening and being honest — even when you don't have the answer they want — goes a long way." },
+  { q: "Where do you see yourself in 2-3 years?", a: "I'd love to grow within Schmitz Cargobull. The job description mentions internal career development, and that really appeals to me. I could see myself developing deeper product expertise, maybe moving into a team lead or specialist role over time. I'm also keen to improve my German, which could open up more opportunities within the company." },
+  { q: "Why are you relocating?", a: "I'm ready for a new chapter. I want to fully commit to building my career in a professional environment, and this role aligns perfectly with my language skills and customer service background. Relocating shows I'm serious about this opportunity — it's a deliberate choice, not a fallback." },
+];
+
+const mockContainer = document.getElementById('mock-questions');
+mockQuestions.forEach((mq, i) => {
+  mockContainer.innerHTML += `
+    <div class="question-block">
+      <h4>Q${i+1}: ${mq.q}</h4>
+      <button class="answer-toggle" onclick="toggleAnswer('mq${i}')">Show Suggested Answer</button>
+      <div class="sample-answer" id="mq${i}">${mq.a}</div>
+      <div class="self-rate">
+        <span>Confidence:</span>
+        ${[1,2,3,4,5].map(n => `<button class="rate-btn" onclick="rate(this)">${n}</button>`).join('')}
+      </div>
+    </div>
+  `;
+});
+
+function toggleAnswer(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('visible');
+}
+
+function rate(btn) {
+  btn.parentElement.querySelectorAll('.rate-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+// Checklist progress
+function updateProgress() {
+  const total = 15;
+  const checked = document.querySelectorAll('#checklist-items input:checked').length;
+  document.getElementById('progress-fill').style.width = `${(checked/total)*100}%`;
+  document.getElementById('progress-text').textContent = `${checked} / ${total} completed`;
+
+  document.querySelectorAll('.checklist-item').forEach(item => {
+    item.classList.toggle('done', item.querySelector('input').checked);
+  });
+
+  localStorage.setItem('rafael-checklist', JSON.stringify(
+    Array.from(document.querySelectorAll('#checklist-items input')).map(cb => cb.checked)
+  ));
+}
+
+// Timer
+let timerInterval = null;
+let timerSeconds = 0;
+let timerRunning = false;
+
+function toggleTimer() {
+  const btn = document.getElementById('timer-start');
+  if (timerRunning) {
+    clearInterval(timerInterval);
+    btn.textContent = 'Resume';
+    btn.className = 'timer-btn timer-start';
+    timerRunning = false;
+  } else {
+    timerInterval = setInterval(() => {
+      timerSeconds++;
+      const m = Math.floor(timerSeconds / 60);
+      const s = timerSeconds % 60;
+      document.getElementById('timer-display').textContent = `${m}:${s.toString().padStart(2,'0')}`;
+
+      const hint = document.getElementById('timer-hint');
+      if (timerSeconds < 60) hint.textContent = 'Keep going...';
+      else if (timerSeconds <= 120) { hint.textContent = 'Sweet spot! Good length.'; hint.style.color = 'var(--success)'; }
+      else { hint.textContent = 'Getting long — try to wrap up.'; hint.style.color = 'var(--accent)'; }
+    }, 1000);
+    btn.textContent = 'Pause';
+    btn.className = 'timer-btn timer-pause';
+    timerRunning = true;
+  }
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerSeconds = 0;
+  timerRunning = false;
+  document.getElementById('timer-display').textContent = '0:00';
+  document.getElementById('timer-start').textContent = 'Start';
+  document.getElementById('timer-start').className = 'timer-btn timer-start';
+  document.getElementById('timer-hint').textContent = 'Sweet spot: 1:00 - 2:00';
+  document.getElementById('timer-hint').style.color = '';
+}
+
+// Notes with localStorage
+const notesArea = document.getElementById('notes-area');
+const savedNotes = localStorage.getItem('rafael-notes');
+if (savedNotes) notesArea.value = savedNotes;
+
+let saveTimeout;
+notesArea.addEventListener('input', () => {
+  clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(() => {
+    localStorage.setItem('rafael-notes', notesArea.value);
+    const indicator = document.getElementById('save-indicator');
+    indicator.classList.add('show');
+    setTimeout(() => indicator.classList.remove('show'), 1500);
+  }, 500);
+});
+
+// Load checklist state
+const savedChecklist = localStorage.getItem('rafael-checklist');
+if (savedChecklist) {
+  const states = JSON.parse(savedChecklist);
+  document.querySelectorAll('#checklist-items input').forEach((cb, i) => {
+    if (states[i]) cb.checked = true;
+  });
+  updateProgress();
+}
+
+// Keyboard navigation for flashcards
+document.addEventListener('keydown', (e) => {
+  if (document.getElementById('flashcards').classList.contains('active')) {
+    if (e.key === 'ArrowRight') nextCard();
+    if (e.key === 'ArrowLeft') prevCard();
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flipCard(); }
+  }
+});
+</script>
+
+</body>
+</html>
